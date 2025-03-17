@@ -1,10 +1,10 @@
-package study.kejizhai.services.Impl;
+package com.teamwork.kejizhai.services.Impl;
 
-import study.kejizhai.bean.Session;
-import study.kejizhai.dao.SessionDao;
-import study.kejizhai.bean.Massage;
-import study.kejizhai.services.SessionService;
-import study.kejizhai.bean.Users;
+import com.teamwork.kejizhai.bean.Session;
+import com.teamwork.kejizhai.dao.SessionDao;
+import com.teamwork.kejizhai.bean.Massage;
+import com.teamwork.kejizhai.services.SessionService;
+import com.teamwork.kejizhai.bean.Users;
 
 import java.util.Date;
 import java.util.List;

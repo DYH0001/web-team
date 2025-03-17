@@ -1,8 +1,8 @@
-package study.kejizhai.services;
+package com.teamwork.kejizhai.services;
 
-import study.kejizhai.bean.Session;
-import study.kejizhai.bean.Massage;
-import study.kejizhai.bean.Users;
+import com.teamwork.kejizhai.bean.Session;
+import com.teamwork.kejizhai.bean.Massage;
+import com.teamwork.kejizhai.bean.Users;
 
 import java.sql.SQLException;
 import java.util.List;

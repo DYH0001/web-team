@@ -1,7 +1,7 @@
-package study.kejizhai.dao.Impl;
+package com.teamwork.kejizhai.dao.Impl;
 
-import study.kejizhai.bean.shoppingcart;
-import study.kejizhai.dao.shoppingcartDao;
+import com.teamwork.kejizhai.bean.shoppingcart;
+import com.teamwork.kejizhai.dao.shoppingcartDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

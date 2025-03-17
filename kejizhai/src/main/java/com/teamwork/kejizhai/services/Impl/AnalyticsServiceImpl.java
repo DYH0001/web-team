@@ -1,12 +1,12 @@
-package study.kejizhai.services.Impl;
+package com.teamwork.kejizhai.services.Impl;
 
-import study.kejizhai.services.AnalyticsService;
-import study.kejizhai.services.OrderService;
-import study.kejizhai.bean.Items;
-import study.kejizhai.bean.Users;
-import study.kejizhai.bean.review;
+import com.teamwork.kejizhai.services.AnalyticsService;
+import com.teamwork.kejizhai.services.OrderService;
+import com.teamwork.kejizhai.bean.Items;
+import com.teamwork.kejizhai.bean.Users;
+import com.teamwork.kejizhai.bean.review;
 import org.springframework.stereotype.Service;
-import study.kejizhai.bean.Order;
+import com.teamwork.kejizhai.bean.Order;
 
 import java.util.List;
 import java.util.Map;

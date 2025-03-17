@@ -1,9 +1,9 @@
-package study.kejizhai.dao.Impl;
+package com.teamwork.kejizhai.dao.Impl;
 
-import study.kejizhai.dao.SessionDao;
-import study.kejizhai.bean.Session;
-import study.kejizhai.bean.Users;
-import study.kejizhai.bean.Massage;
+import com.teamwork.kejizhai.dao.SessionDao;
+import com.teamwork.kejizhai.bean.Session;
+import com.teamwork.kejizhai.bean.Users;
+import com.teamwork.kejizhai.bean.Massage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

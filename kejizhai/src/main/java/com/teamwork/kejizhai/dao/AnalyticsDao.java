@@ -1,9 +1,9 @@
-package study.kejizhai.dao;
+package com.teamwork.kejizhai.dao;
 
-import study.kejizhai.bean.Items;
-import study.kejizhai.bean.Users;
-import study.kejizhai.bean.review;
-import study.kejizhai.bean.Order;
+import com.teamwork.kejizhai.bean.Items;
+import com.teamwork.kejizhai.bean.Users;
+import com.teamwork.kejizhai.bean.review;
+import com.teamwork.kejizhai.bean.Order;
 
 import java.sql.SQLException;
 import java.util.List;

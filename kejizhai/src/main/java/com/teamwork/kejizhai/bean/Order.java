@@ -1,11 +1,11 @@
-package study.kejizhai.bean;
+package com.teamwork.kejizhai.bean;
 
 import java.util.Date;
 import java.util.List;
 
-import study.kejizhai.bean.Items;
-import study.kejizhai.bean.Address;
-import study.kejizhai.bean.Users;
+import com.teamwork.kejizhai.bean.Items;
+import com.teamwork.kejizhai.bean.Address;
+import com.teamwork.kejizhai.bean.Users;
 
 /**
  * 订单类

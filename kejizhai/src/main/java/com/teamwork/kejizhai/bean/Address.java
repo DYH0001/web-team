@@ -1,4 +1,4 @@
-package study.kejizhai.bean;
+package com.teamwork.kejizhai.bean;
 
 public class Address {
     private String Address_telephone;

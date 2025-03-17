@@ -1,6 +1,6 @@
-package com.teamwork.kejizhai.dao;
+package study.kejizhai.dao;
 
-import com.teamwork.kejizhai.bean.AfterSales;
+import study.kejizhai.bean.AfterSales;
 import java.sql.SQLException;
 import java.util.List;
 

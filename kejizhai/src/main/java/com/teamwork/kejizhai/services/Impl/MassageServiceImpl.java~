@@ -1,11 +1,11 @@
-package com.teamwork.kejizhai.services.Impl;
+package study.kejizhai.services.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.teamwork.kejizhai.bean.Massage;
-import com.teamwork.kejizhai.services.MassageService;
-import com.teamwork.kejizhai.dao.MassageDao;
+import study.kejizhai.bean.Massage;
+import study.kejizhai.services.MassageService;
+import study.kejizhai.dao.MassageDao;
 
 import java.sql.SQLException;
 

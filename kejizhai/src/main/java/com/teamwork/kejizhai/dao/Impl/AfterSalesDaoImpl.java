@@ -1,7 +1,7 @@
-package study.kejizhai.dao.Impl;
+package com.teamwork.kejizhai.dao.Impl;
 
-import study.kejizhai.bean.AfterSales;
-import study.kejizhai.dao.AfterSalesDao;
+import com.teamwork.kejizhai.bean.AfterSales;
+import com.teamwork.kejizhai.dao.AfterSalesDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

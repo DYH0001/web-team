@@ -1,15 +1,15 @@
-package study.kejizhai.bean;
+package com.teamwork.kejizhai.bean;
 public class shop {
-    private int sid;
-    private int uid;
-    private int Iid;
+    private String sid;
+    private String uid;
+    private String Iid;
     private int count;
     private int inum;
 
     public shop() {
     }
 
-public shop(int sid, int uid, int iid, int count, int inum) {
+public shop(String sid, String uid, String iid, int count, int inum) {
         this.sid = sid;
         this.uid = uid;
         this.Iid = iid;
@@ -18,13 +18,13 @@ public shop(int sid, int uid, int iid, int count, int inum) {
     }
 
 
-    public int getsid() {
+    public String getsid() {
         return sid;
     }
-    public int getUid(){
+    public String getUid(){
         return uid;
     }
-    public int getIid(){
+    public String getIid(){
         return Iid;
     }
     public int getCount(){

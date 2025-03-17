@@ -1,7 +1,7 @@
-package study.kejizhai.dao;
+package com.teamwork.kejizhai.dao;
 
-import study.kejizhai.bean.Users;
-import study.kejizhai.bean.Address;
+import com.teamwork.kejizhai.bean.Users;
+import com.teamwork.kejizhai.bean.Address;
 import java.sql.SQLException;
 import java.util.List;
 

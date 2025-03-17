@@ -1,6 +1,6 @@
-package study.kejizhai.dao;
+package com.teamwork.kejizhai.dao;
 
-import study.kejizhai.bean.Massage;
+import com.teamwork.kejizhai.bean.Massage;
 
 
 import java.sql.SQLException;

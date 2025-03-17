@@ -1,9 +1,9 @@
-package study.kejizhai.services;
+package com.teamwork.kejizhai.services;
 
 import java.sql.SQLException;
 
 
-import study.kejizhai.bean.*;
+import com.teamwork.kejizhai.bean.*;
 
 import java.util.List;
 

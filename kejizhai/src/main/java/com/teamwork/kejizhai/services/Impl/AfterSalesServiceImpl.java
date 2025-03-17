@@ -1,14 +1,14 @@
-package study.kejizhai.services.Impl;
+package com.teamwork.kejizhai.services.Impl;
 
-import study.kejizhai.bean.Items;
-import study.kejizhai.bean.Order;
-import study.kejizhai.bean.Users;
-import study.kejizhai.services.AfterSalesService;
-import study.kejizhai.dao.AfterSalesDao;
+import com.teamwork.kejizhai.bean.Items;
+import com.teamwork.kejizhai.bean.Order;
+import com.teamwork.kejizhai.bean.Users;
+import com.teamwork.kejizhai.services.AfterSalesService;
+import com.teamwork.kejizhai.dao.AfterSalesDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import study.kejizhai.bean.AfterSales;
+import com.teamwork.kejizhai.bean.AfterSales;
 
 import java.sql.SQLException;
 import java.util.Date;

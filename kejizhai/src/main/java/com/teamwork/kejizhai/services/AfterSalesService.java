@@ -1,8 +1,8 @@
-package study.kejizhai.services;
+package com.teamwork.kejizhai.services;
 
-import study.kejizhai.bean.Items;
-import study.kejizhai.bean.Order;
-import study.kejizhai.bean.Users;
+import com.teamwork.kejizhai.bean.Items;
+import com.teamwork.kejizhai.bean.Order;
+import com.teamwork.kejizhai.bean.Users;
 
 public interface AfterSalesService {
     void addAfterSales(Users user, Order order, Items item, String reason, String type);

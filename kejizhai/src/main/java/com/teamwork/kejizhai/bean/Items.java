@@ -1,4 +1,4 @@
-package study.kejizhai.bean;
+package com.teamwork.kejizhai.bean;
 
 public class Items {
     private String Iid;

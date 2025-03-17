@@ -1,8 +1,8 @@
-package study.kejizhai.services.Impl;
+package com.teamwork.kejizhai.services.Impl;
 
-import study.kejizhai.bean.*;
-import study.kejizhai.services.OrderService;
-import study.kejizhai.dao.OrderDao;
+import com.teamwork.kejizhai.bean.*;
+import com.teamwork.kejizhai.services.OrderService;
+import com.teamwork.kejizhai.dao.OrderDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

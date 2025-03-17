@@ -1,7 +1,7 @@
-package study.kejizhai.bean;
+package com.teamwork.kejizhai.bean;
 
-import study.kejizhai.bean.Order;
-import study.kejizhai.bean.Address;
+import com.teamwork.kejizhai.bean.Order;
+import com.teamwork.kejizhai.bean.Address;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;

@@ -1,8 +1,8 @@
-package study.kejizhai.services.Impl;
+package com.teamwork.kejizhai.services.Impl;
 
-import study.kejizhai.bean.*;
-import study.kejizhai.services.ItemService;
-import study.kejizhai.dao.ItemDao;
+import com.teamwork.kejizhai.bean.*;
+import com.teamwork.kejizhai.services.ItemService;
+import com.teamwork.kejizhai.dao.ItemDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.sql.SQLException; 

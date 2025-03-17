@@ -1,6 +1,6 @@
-package study.kejizhai.services;
+package com.teamwork.kejizhai.services;
 
-import study.kejizhai.bean.*;
+import com.teamwork.kejizhai.bean.*;
 import java.util.List;
 import java.sql.SQLException;  // 添加这个导入
 

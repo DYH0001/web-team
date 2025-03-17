@@ -1,9 +1,9 @@
-package com.teamwork.kejizhai.dao.Impl;
+package study.kejizhai.dao.Impl;
 
-import com.teamwork.kejizhai.bean.Users;
-import com.teamwork.kejizhai.dao.UserDao;
-import com.teamwork.kejizhai.bean.Address;
-import com.teamwork.kejizhai.bean.Order;
+import study.kejizhai.bean.Users;
+import study.kejizhai.dao.UserDao;
+import study.kejizhai.bean.Address;
+import study.kejizhai.bean.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

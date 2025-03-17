@@ -1,4 +1,4 @@
-package study.kejizhai.services.Impl;
+package com.teamwork.kejizhai.services.Impl;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import study.kejizhai.bean.shoppingcart;
-import study.kejizhai.dao.shoppingcartDao;
-import study.kejizhai.services.shoppingcartService;
+import com.teamwork.kejizhai.bean.shoppingcart;
+import com.teamwork.kejizhai.dao.shoppingcartDao;
+import com.teamwork.kejizhai.services.shoppingcartService;
 @Service
 public class shoppingcartImpl implements shoppingcartService {
     

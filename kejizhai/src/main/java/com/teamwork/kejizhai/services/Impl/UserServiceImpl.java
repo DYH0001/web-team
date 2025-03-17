@@ -1,9 +1,9 @@
-package study.kejizhai.services.Impl;
+package com.teamwork.kejizhai.services.Impl;
 
-import study.kejizhai.bean.Users;
-import study.kejizhai.bean.Address;
-import study.kejizhai.dao.UserDao;
-import study.kejizhai.services.UserService;
+import com.teamwork.kejizhai.bean.Users;
+import com.teamwork.kejizhai.bean.Address;
+import com.teamwork.kejizhai.dao.UserDao;
+import com.teamwork.kejizhai.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

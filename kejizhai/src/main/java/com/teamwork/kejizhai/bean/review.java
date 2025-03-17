@@ -1,4 +1,4 @@
-package study.kejizhai.bean;
+package com.teamwork.kejizhai.bean;
 import java.util.List;
 
 public class review{

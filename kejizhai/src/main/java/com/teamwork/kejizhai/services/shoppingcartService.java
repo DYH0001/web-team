@@ -1,9 +1,9 @@
-package study.kejizhai.services;
+package com.teamwork.kejizhai.services;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import study.kejizhai.bean.shoppingcart;
+import com.teamwork.kejizhai.bean.shoppingcart;
 
 public interface shoppingcartService {
     public boolean addshoppingcart(shoppingcart shoppingcart) throws SQLException;

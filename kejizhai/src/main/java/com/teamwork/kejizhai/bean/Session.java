@@ -1,5 +1,6 @@
-package study.kejizhai.bean;
+package com.teamwork.kejizhai.bean;
 
+import com.teamwork.kejizhai.bean.Users;
 import java.util.Date;
 import java.util.List;
 
