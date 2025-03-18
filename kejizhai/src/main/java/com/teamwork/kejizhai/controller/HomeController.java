@@ -1,13 +1,13 @@
-package com.teamwork.kejizhai.controller;
+// package com.teamwork.kejizhai.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+// import org.springframework.stereotype.Controller;
+// import org.springframework.web.bind.annotation.GetMapping;
 
-@Controller
-public class HomeController {
+// @Controller
+// public class HomeController {
     
-    @GetMapping({"/", "/index", "/home"})
-    public String home() {
-        return "forward:/home.html";
-    }
-}
+//     @GetMapping({"/", "/index", "/home"})
+//     public String home() {
+//         return "redirect:/home.html";
+//     }
+// }
