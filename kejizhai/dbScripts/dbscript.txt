@@ -1,0 +1,194 @@
+
+-- 创建数据库
+CREATE DATABASE IF NOT EXISTS kejizhai DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE kejizhai;
+
+-- 用户表
+CREATE TABLE IF NOT EXISTS users (
+    uid VARCHAR(50) PRIMARY KEY,
+    uname VARCHAR(100) NOT NULL,
+    age INT,
+    password_hash VARCHAR(255) NOT NULL,
+    telephone VARCHAR(20),
+    address_id INT,
+    is_phone_verified BOOLEAN DEFAULT FALSE,
+    is_email_verified BOOLEAN DEFAULT FALSE,
+    create_time DATETIME NOT NULL,
+    update_time DATETIME NOT NULL,
+    role ENUM('ADMIN', 'USER', 'SELLER') DEFAULT 'USER'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 地址表
+CREATE TABLE IF NOT EXISTS address (
+    address_id INT AUTO_INCREMENT PRIMARY KEY,
+    uid VARCHAR(50) NOT NULL,
+    province VARCHAR(50) NOT NULL,
+    city VARCHAR(50) NOT NULL,
+    district VARCHAR(50) NOT NULL,
+    detail VARCHAR(255) NOT NULL,
+    receiver VARCHAR(50) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    is_default BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 商店表
+CREATE TABLE IF NOT EXISTS shop (
+    shop_id INT AUTO_INCREMENT PRIMARY KEY,
+    shop_name VARCHAR(100) NOT NULL,
+    owner_id VARCHAR(50) NOT NULL,
+    description TEXT,
+    logo_url VARCHAR(255),
+    create_time DATETIME NOT NULL,
+    status INT DEFAULT 1,
+    FOREIGN KEY (owner_id) REFERENCES users(uid) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 商品表
+CREATE TABLE IF NOT EXISTS items (
+    iid INT AUTO_INCREMENT PRIMARY KEY,
+    iname VARCHAR(100) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    cost_price DECIMAL(10,2),
+    description TEXT,
+    info TEXT,
+    iimage VARCHAR(255),
+    category VARCHAR(50),
+    shop INT,
+    uptime DATETIME,
+    istatus INT DEFAULT 1,
+    stock INT DEFAULT 0,
+    FOREIGN KEY (shop) REFERENCES shop(shop_id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 订单表
+CREATE TABLE IF NOT EXISTS orders (
+    oid VARCHAR(50) PRIMARY KEY,
+    uid VARCHAR(50) NOT NULL,
+    order_date DATETIME NOT NULL,
+    total_amount DECIMAL(10,2) NOT NULL,
+    pay_status INT DEFAULT 0,
+    shipping_status INT DEFAULT 0,
+    address_id INT,
+    payment_method VARCHAR(50),
+    payment_time DATETIME,
+    shipping_time DATETIME,
+    completion_time DATETIME,
+    FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE,
+    FOREIGN KEY (address_id) REFERENCES address(address_id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 订单商品关联表
+CREATE TABLE IF NOT EXISTS order_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id VARCHAR(50) NOT NULL,
+    item_id INT NOT NULL,
+    quantity INT NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(oid) ON DELETE CASCADE,
+    FOREIGN KEY (item_id) REFERENCES items(iid) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 购物车表
+CREATE TABLE IF NOT EXISTS shopping_cart (
+    scid INT AUTO_INCREMENT PRIMARY KEY,
+    uid VARCHAR(50) NOT NULL,
+    iid INT NOT NULL,
+    count INT NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE,
+    FOREIGN KEY (iid) REFERENCES items(iid) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 评论表
+CREATE TABLE IF NOT EXISTS reviews (
+    sid INT AUTO_INCREMENT PRIMARY KEY,
+    iid INT NOT NULL,
+    oid VARCHAR(50) NOT NULL,
+    uid VARCHAR(50) NOT NULL,
+    ireview INT NOT NULL,
+    icomment TEXT,
+    review_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (iid) REFERENCES items(iid) ON DELETE CASCADE,
+    FOREIGN KEY (oid) REFERENCES orders(oid) ON DELETE CASCADE,
+    FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 售后表
+CREATE TABLE IF NOT EXISTS after_sales (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(50) NOT NULL,
+    order_id VARCHAR(50) NOT NULL,
+    item_id INT NOT NULL,
+    reason TEXT NOT NULL,
+    type INT NOT NULL COMMENT '1:退款 2:换货 3:维修',
+    status INT NOT NULL COMMENT '0:待处理 1:处理中 2:已完成 3:已拒绝',
+    create_time DATETIME NOT NULL,
+    update_time DATETIME NOT NULL,
+    finish_time DATETIME,
+    FOREIGN KEY (user_id) REFERENCES users(uid) ON DELETE CASCADE,
+    FOREIGN KEY (order_id) REFERENCES orders(oid) ON DELETE CASCADE,
+    FOREIGN KEY (item_id) REFERENCES items(iid) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 会话表
+CREATE TABLE IF NOT EXISTS sessions (
+    session_id VARCHAR(50) PRIMARY KEY,
+    start_time DATETIME NOT NULL,
+    end_time DATETIME,
+    is_active BOOLEAN DEFAULT TRUE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 用户会话关联表
+CREATE TABLE IF NOT EXISTS user_sessions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    session_id VARCHAR(50) NOT NULL,
+    user_id VARCHAR(50) NOT NULL,
+    FOREIGN KEY (session_id) REFERENCES sessions(session_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(uid) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 消息表
+CREATE TABLE IF NOT EXISTS messages (
+    message_id VARCHAR(50) PRIMARY KEY,
+    session_id VARCHAR(50) NOT NULL,
+    sender_id VARCHAR(50) NOT NULL,
+    content TEXT NOT NULL,
+    send_time DATETIME NOT NULL,
+    is_read BOOLEAN DEFAULT FALSE,
+    is_withdrawn BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (session_id) REFERENCES sessions(session_id) ON DELETE CASCADE,
+    FOREIGN KEY (sender_id) REFERENCES users(uid) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 创建索引
+CREATE INDEX idx_users_telephone ON users(telephone);
+CREATE INDEX idx_items_category ON items(category);
+CREATE INDEX idx_items_shop ON items(shop);
+CREATE INDEX idx_orders_uid ON orders(uid);
+CREATE INDEX idx_orders_status ON orders(pay_status, shipping_status);
+CREATE INDEX idx_reviews_iid ON reviews(iid);
+CREATE INDEX idx_reviews_uid ON reviews(uid);
+CREATE INDEX idx_after_sales_user ON after_sales(user_id);
+CREATE INDEX idx_after_sales_order ON after_sales(order_id);
+CREATE INDEX idx_messages_session ON messages(session_id);
+
+-- 创建管理员账户
+INSERT INTO users (uid, uname, age, password_hash, create_time, update_time, role)
+VALUES ('admin', '系统管理员', 30, 'admin123', NOW(), NOW(), 'ADMIN');
+
+-- 创建测试用户
+INSERT INTO users (uid, uname, age, password_hash, telephone, create_time, update_time, role)
+VALUES 
+('user001', '测试用户1', 25, 'password123', '13800138001', NOW(), NOW(), 'USER'),
+('seller001', '测试商家1', 35, 'password123', '13900139001', NOW(), NOW(), 'SELLER');
+
+-- 创建测试商店
+INSERT INTO shop (shop_name, owner_id, description, create_time)
+VALUES ('科技数码店', 'seller001', '专营各类数码科技产品', NOW());
+
+COMMIT;
+
+-- 完成数据库初始化
+SELECT 'kejizhai数据库初始化完成' AS '状态';

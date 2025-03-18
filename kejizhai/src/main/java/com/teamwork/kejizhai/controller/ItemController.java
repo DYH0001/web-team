@@ -18,12 +18,12 @@ import com.teamwork.kejizhai.bean.Items;
 import com.teamwork.kejizhai.services.ItemService;
 
 @RestController  // 标记这是一个REST风格的Controller
-@RequestMapping("/api/items")  // 设置该Controller的基础URL路径
+@RequestMapping("/api/items")  
 public class ItemController {
 
-    @Autowired  // 自动注入ItemService
+    @Autowired  
     private ItemService itemService;
-    @GetMapping("/{iid}")  // 处理 GET /api/items/{iid} 请求
+    @GetMapping("/{iid}")  
     public ResponseEntity<?> getItem(@PathVariable String iid) {
         try {
             List<Items> items = itemService.getItems(iid);
