@@ -11,13 +11,40 @@ public class review{
 
 public review(){}
 
-public review(int Iid,int Oid,int sid,int Ireview,String Icomment){
-    this.Iid=Iid;
-    this.Oid=Oid;
-    this.sid=sid;
-    this.Ireview=Ireview;  
-    this.Icomment=Icomment;
-    this.Uid=Uid;
+// 添加缺少的setter方法
+public void setSid(int sid) {
+    this.sid = sid;
+}
+
+public void setIid(int iid) {
+    this.Iid = iid;
+}
+
+public void setOid(int oid) {
+    this.Oid = oid;
+}
+
+public void setIreview(int ireview) {
+    this.Ireview = ireview;
+}
+
+public void setUid(String uid) {
+    this.Uid = uid;
+}
+
+// 修正setIcomment方法
+public void setIcomment(String icomment) {
+    this.Icomment = icomment;
+}
+
+// 修正构造函数
+public review(int Iid, int Oid, int sid, int Ireview, String Icomment, String Uid) {
+    this.Iid = Iid;
+    this.Oid = Oid;
+    this.sid = sid;
+    this.Ireview = Ireview;  
+    this.Icomment = Icomment;
+    this.Uid = Uid;
 }
 
 public int getIid(){

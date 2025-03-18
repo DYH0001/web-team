@@ -1,4 +1,4 @@
-package com.teamwork.kejizhai.control;
+package com.teamwork.kejizhai.controller;
 
 import java.sql.SQLException;
 import java.util.List;

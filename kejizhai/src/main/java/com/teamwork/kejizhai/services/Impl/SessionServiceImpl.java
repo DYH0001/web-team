@@ -6,8 +6,10 @@ import com.teamwork.kejizhai.bean.Massage;
 import com.teamwork.kejizhai.services.SessionService;
 import com.teamwork.kejizhai.bean.Users;
 
+
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +21,13 @@ public class SessionServiceImpl implements SessionService {
     private SessionDao sessionDao;
 
     @Override
-    public void addSession(List<Users> users) {
+    public String addSession(List<Users> users) {
         try {
             sessionDao.addSession(users);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
     }
     
     @Override
@@ -71,4 +74,13 @@ public class SessionServiceImpl implements SessionService {
         
         return true;
     }
+    @Override
+    public List<Session> getUserSessions(String userId) throws SQLException {
+    try {
+        return sessionDao.getUserSessions(userId);
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return new ArrayList<>();
+    }
+}
 }

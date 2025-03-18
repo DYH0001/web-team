@@ -8,11 +8,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface SessionService {
-    public void addSession(List<Users> users) throws SQLException;
+    public String addSession(List<Users> users) throws SQLException;
     public void deleteSession(String sessionId) throws SQLException;
     public Session getSessionByID(String sessionId) throws SQLException;
     public boolean isActive(Session session) throws SQLException;
+    public List<Session> getUserSessions(String userId) throws SQLException;
     }
+
     
  
     

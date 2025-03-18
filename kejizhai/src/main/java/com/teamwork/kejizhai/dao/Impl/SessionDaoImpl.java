@@ -25,23 +25,26 @@ public class SessionDaoImpl implements SessionDao {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public void addSession(List<Users> users) {
+    public String addSession(List<Users> users) {
         try {
-            // 生成会话ID
+            // 会话ID
             String sessionId = UUID.randomUUID().toString().replace("-", "");
             
-            // 创建会话记录
+            //会话记录
             String sql = "INSERT INTO sessions (session_id, start_time, is_active) VALUES (?, ?, ?)";
             jdbcTemplate.update(sql, sessionId, new Date(), true);
             
-            // 添加用户到会话中
+            //添加用户
             for (Users user : users) {
                 String userSessionSql = "INSERT INTO user_sessions (session_id, user_id) VALUES (?, ?)";
                 jdbcTemplate.update(userSessionSql, sessionId, user.getUid());
+            return sessionId;
             }
         } catch (Exception e) {
             throw new RuntimeException("创建会话失败: " + e.getMessage(), e);
+        
         }
+        return null;
     }
 
     @Override
@@ -95,6 +98,15 @@ public class SessionDaoImpl implements SessionDao {
                 session.getSessionId());
         } catch (Exception e) {
             throw new RuntimeException("更新会话失败: " + e.getMessage(), e);
+        }   
+    }
+    @Override
+    public List<Session> getUserSessions(String userId) {
+        try {
+            String sql = "SELECT * FROM sessions WHERE session_id IN (SELECT session_id FROM user_sessions WHERE user_id = ?)";
+            return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Session.class), userId);
+        } catch (Exception e) {
+            throw new RuntimeException("获取用户会话失败: " + e.getMessage(), e);
         }
     }
 }

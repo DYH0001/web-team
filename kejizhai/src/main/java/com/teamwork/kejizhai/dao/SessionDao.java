@@ -9,11 +9,13 @@ import java.sql.SQLException;
 
 
 public interface SessionDao {
-    public void addSession(List<Users> Session) throws SQLException;
+    public String addSession(List<Users> Session) throws SQLException;
 
     public void deleteSession(String SessionId) throws SQLException;
 
     public Session getSessionByID(String SessionId) throws SQLException;
 
     public void updateSession(Session Session) throws SQLException;
+
+    public List<Session> getUserSessions(String userId) throws SQLException;
 } 
