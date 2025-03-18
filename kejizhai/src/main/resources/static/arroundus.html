@@ -7,46 +7,20 @@
     <link rel="stylesheet" href="css/home.css">
     <script src="js/home.js"></script>
     <style>
-.content {
+    .content {
     padding: 20px;
     background-color: #f9f9f9;
     margin-left: 300px;
     margin-top: 120px; /* 根据侧边栏的宽度调整 */
-}
-
-.news-item {
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-}
-
-.news-item h2 {
-    font-size: 24px;
-    color: #333;
-}
-
-.news-item p {
-    font-size: 16px;
-    color: #666;
-}
-
-.read-more {
-    display: inline-block;
-    margin-top: 10px;
-    font-size: 14px;
-    color: #007bff;
-    text-decoration: none;
-}
-
-.read-more:hover {
-    text-decoration: underline;
-}
+    }
     </style>
+    <script src="js/search.js"></script>
 </head>
 <body>
     <div class="nav">
         <img src="/img/logo.png" alt="这是我们的logo" class="logo"> 
-        <input type="text" placeholder="搜索" class="search" >
-        <img src="/img/search.png" alt="搜索" class="search_bottom">
+        <input type="text" placeholder="搜索" class="search" id="searchInput">
+        <img src="/img/search.png" alt="搜索" class="search_bottom" id="searchButton">
         <img src="/img/preview.gif" alt="头像" class="icon">
         <img src="/img/cart.png" alt="购物车" class="icon">  
         <img src="/img/collection.png" alt="收藏" class="icon">
