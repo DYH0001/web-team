@@ -75,7 +75,7 @@ public class ItemController {
     }
 
      @DeleteMapping("/{iid}")  // 处理 DELETE /api/items/{iid} 请求
-    public ResponseEntity<?> deleteItem(@PathVariable int iid) {
+    public ResponseEntity<?> deleteItem(@PathVariable String iid) {
         try {
             boolean success = itemService.deleteItem(iid);
             if (success) {
@@ -89,7 +89,7 @@ public class ItemController {
     }
  
     @PutMapping("/{iid}/status")  // 处理 PUT /api/items/{iid}/status 请求
-    public ResponseEntity<?> setItemStatus(@PathVariable int iid) {
+    public ResponseEntity<?> setItemStatus(@PathVariable String iid) {
         try {
             int result = itemService.setIstatus(iid);
             if (result > 0) {

@@ -11,4 +11,5 @@ public interface OrderService {
     public boolean changeOrder(Order orders) throws SQLException;
     public List<Order> searchOrders(String keyword) throws SQLException;
     public boolean deleteOrder(String oid) throws SQLException;
+    public Order getOrderById(String oid) throws SQLException;
 }

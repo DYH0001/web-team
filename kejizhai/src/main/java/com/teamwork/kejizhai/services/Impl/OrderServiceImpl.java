@@ -60,4 +60,12 @@ public class OrderServiceImpl implements OrderService {
             throw new SQLException("搜索订单失败: " + e.getMessage());
         }
     }
+    @Override
+    public Order getOrderById(String oid) throws SQLException {
+        try {
+            return orderDao.getOrderById(oid);
+        } catch (SQLException e) {
+            throw new SQLException("获取订单失败: " + e.getMessage());
+        }
+    }
 }

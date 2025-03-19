@@ -8,7 +8,8 @@ public interface ItemDao {
     List<Items> getItems(String iid) throws SQLException;
     boolean addItem(Items items) throws SQLException;
     boolean updateItem(Items items) throws SQLException;
-    boolean deleteItem(int iid) throws SQLException;
+    boolean deleteItem(String iid) throws SQLException;
     List<Items> getItems() throws SQLException;
-    int setIstatus(int iid) throws SQLException;
+    int setIstatus(String iid) throws SQLException;
+    Items getItemById(String iid) throws SQLException;
 }

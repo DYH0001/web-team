@@ -69,7 +69,7 @@ public class ItemDaoImpl implements ItemDao {
     }
 
     @Override
-    public boolean deleteItem(int iid) throws SQLException {
+    public boolean deleteItem(String iid) throws SQLException {
         String sql = "DELETE FROM items WHERE iid = ?";
         try {
             int result = jdbcTemplate.update(sql, iid);
@@ -90,12 +90,21 @@ public class ItemDaoImpl implements ItemDao {
     }
 
     @Override
-    public int setIstatus(int iid) throws SQLException {
+    public int setIstatus(String iid) throws SQLException {
         String sql = "UPDATE items SET istatus = 1 WHERE iid = ?";
         try {
             return jdbcTemplate.update(sql, iid);
         } catch (Exception e) {
             throw new SQLException("更新商品状态失败", e);
+        }
+    }
+    @Override
+    public Items getItemById(String iid) throws SQLException {
+        String sql = "SELECT * FROM items WHERE iid = ?";
+        try {
+            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Items.class), iid);
+        } catch (Exception e) {
+            throw new SQLException("数据库查询失败", e);
         }
     }
 }

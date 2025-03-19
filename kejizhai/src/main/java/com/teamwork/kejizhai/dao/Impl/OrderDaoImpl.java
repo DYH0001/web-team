@@ -2,6 +2,7 @@ package com.teamwork.kejizhai.dao.Impl;
 import com.teamwork.kejizhai.bean.Order;
 import com.teamwork.kejizhai.bean.Items;
 import com.teamwork.kejizhai.dao.OrderDao;
+import com.teamwork.kejizhai.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -118,4 +119,15 @@ public class OrderDaoImpl implements OrderDao {
             throw new SQLException("搜索订单失败", e);
         }
     }
+    @Override
+    public Order getOrderById(String oid) throws SQLException {
+        String sql = "SELECT * FROM orders WHERE oid =?";
+        try {
+            return jdbcTemplate.queryForObject(sql,
+                new BeanPropertyRowMapper<>(Order.class),
+                oid);
+        } catch (Exception e) {
+            throw new SQLException("获取订单详情失败", e);
+}
+}
 }

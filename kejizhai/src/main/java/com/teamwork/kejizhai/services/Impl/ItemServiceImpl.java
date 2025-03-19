@@ -42,7 +42,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public boolean deleteItem(int iid) throws SQLException {
+    public boolean deleteItem(String iid) throws SQLException {
         try {
             return itemDao.deleteItem(iid);
         } catch (SQLException e) {
@@ -60,11 +60,19 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public int setIstatus(int iid) {
+    public int setIstatus(String iid) {
         try {
             return itemDao.setIstatus(iid);
         } catch (Exception e) {
             return 0; // 设置状态失败返回0
+        }
+    }
+    @Override
+    public Items getItemById(String iid) throws SQLException {
+        try {
+            return itemDao.getItemById(iid);
+        } catch (SQLException e) {
+            throw new SQLException("获取商品信息失败: " + e.getMessage());
         }
     }
 }

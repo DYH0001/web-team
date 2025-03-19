@@ -10,4 +10,5 @@ public interface OrderDao {
     boolean deleteOrder(String oid) throws SQLException;
     boolean changeOrder(Order order) throws SQLException;
     List<Order> searchOrders(String keyword) throws SQLException;
+    Order getOrderById(String oid) throws SQLException;
 }
