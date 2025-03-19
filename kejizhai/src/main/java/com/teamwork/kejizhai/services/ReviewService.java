@@ -1,10 +1,9 @@
 package com.teamwork.kejizhai.services;
 
-import com.teamwork.kejizhai.bean.Items;
-import com.teamwork.kejizhai.bean.Order;
-import com.teamwork.kejizhai.bean.review;
 import java.sql.SQLException;
 import java.util.List;
+
+import com.teamwork.kejizhai.bean.review;
 
 public interface ReviewService {
  
@@ -14,10 +13,7 @@ public interface ReviewService {
     List<review> getReviewsByItemId(String iid) throws SQLException;
 
     List<review> getReviewsByUserId(String uid) throws SQLException;
-
-    review getReviewByOrderId(int oid) throws SQLException;
-    
- 
+    review getReviewByOrderId(String oid) throws SQLException;
     boolean updateReview(review review) throws SQLException;
-      boolean deleteReview(int reviewId) throws SQLException;
+    boolean deleteReview(String rid) throws SQLException;
 }

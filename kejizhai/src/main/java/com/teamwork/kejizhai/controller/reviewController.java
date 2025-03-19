@@ -1,14 +1,23 @@
 package com.teamwork.kejizhai.controller;
 
-import com.teamwork.kejizhai.bean.review;
-import com.teamwork.kejizhai.services.ReviewService;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.SQLException;
-import java.util.*;
+import com.teamwork.kejizhai.bean.review;
+import com.teamwork.kejizhai.services.ReviewService;
 
 @RestController
 @RequestMapping("/api/reviews")
@@ -33,9 +42,9 @@ public class reviewController {
 
 
     @GetMapping("/item/{itemId}")
-    public ResponseEntity<?> getItemReviews(@PathVariable int itemId) {
+    public ResponseEntity<?> getItemReviews(@PathVariable String iid) {
         try {
-            List<review> reviews = ReviewService.getReviewsByItemId(itemId);
+            List<review> reviews = reviewService.getReviewsByItemId(iid);
             return ResponseEntity.ok(successResponse(reviews));
         } catch (SQLException e) {
             return ResponseEntity.badRequest().body(errorResponse("获取商品评论失败: " + e.getMessage()));
@@ -46,7 +55,7 @@ public class reviewController {
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> getUserReviews(@PathVariable String userId) {
         try {
-            List<review> reviews = ReviewService.getReviewsByUserId(userId);
+            List<review> reviews = reviewService.getReviewsByUserId(userId);
             return ResponseEntity.ok(successResponse(reviews));
         } catch (SQLException e) {
             return ResponseEntity.badRequest().body(errorResponse("获取用户评论失败: " + e.getMessage()));
@@ -55,9 +64,9 @@ public class reviewController {
 
 
     @GetMapping("/order/{orderId}")
-    public ResponseEntity<?> getOrderReview(@PathVariable int orderId) {
+    public ResponseEntity<?> getOrderReview(@PathVariable String oid) {
         try {
-            review review = ReviewService.getReviewByOrderId(orderId);
+            review review = reviewService.getReviewByOrderId(oid);
             if (review != null) {
                 return ResponseEntity.ok(successResponse(review));
             } else {
@@ -70,10 +79,10 @@ public class reviewController {
 
 
     @PutMapping("/{reviewId}")
-    public ResponseEntity<?> updateReview(@PathVariable int reviewId, @RequestBody review updatedReview) {
+    public ResponseEntity<?> updateReview(@PathVariable String sid, @RequestBody review updatedReview) {
         try {
-            updatedReview.setSid(reviewId);
-            boolean success = ReviewService.updateReview(updatedReview);
+            updatedReview.setSid(sid);
+            boolean success = reviewService.updateReview(updatedReview);
             if (success) {
                 return ResponseEntity.ok(successResponse("评论更新成功"));
             } else {
@@ -86,9 +95,9 @@ public class reviewController {
 
 
     @DeleteMapping("/{reviewId}")
-    public ResponseEntity<?> deleteReview(@PathVariable String reviewId) {
+    public ResponseEntity<?> deleteReview(@PathVariable String rid) {
         try {
-            boolean success = ReviewService.deleteReview(reviewId);
+            boolean success = reviewService.deleteReview(rid);
             if (success) {
                 return ResponseEntity.ok(successResponse("评论删除成功"));
             } else {

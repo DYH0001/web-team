@@ -1,15 +1,16 @@
 package com.teamwork.kejizhai.dao.Impl;
 
-import com.teamwork.kejizhai.bean.AfterSales;
-import com.teamwork.kejizhai.dao.AfterSalesDao;
+import java.sql.SQLException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLException;
-import java.util.List;
+import com.teamwork.kejizhai.bean.AfterSales;
+import com.teamwork.kejizhai.dao.AfterSalesDao;
 
 @Repository
 @Transactional
@@ -84,13 +85,13 @@ public class AfterSalesDaoImpl implements AfterSalesDao {
 
     @Override 
     public List<AfterSales> getAfterSalesByUserId(String userId) throws SQLException {
-        String sql = "SELECT * FROM after_sales WHERE user_id=? ORDER BY create_time DESC";
+        String sql = "SELECT * FROM after_sales WHERE user_id = ?";
         try {
-            return jdbcTemplate.query(sql,
-                new BeanPropertyRowMapper<>(AfterSales.class),
+            return jdbcTemplate.query(sql, 
+                new BeanPropertyRowMapper<>(AfterSales.class), 
                 userId);
         } catch (Exception e) {
-            throw new SQLException("查询用户售后记录列表失败", e);
+            throw new SQLException("获取用户售后申请列表失败", e);
         }
     }
 }

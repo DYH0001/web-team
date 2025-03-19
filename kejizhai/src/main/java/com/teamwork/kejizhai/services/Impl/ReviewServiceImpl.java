@@ -1,13 +1,14 @@
 package com.teamwork.kejizhai.services.Impl;
 
-import com.teamwork.kejizhai.bean.review;
-import com.teamwork.kejizhai.dao.ReviewDao;
-import com.teamwork.kejizhai.services.ReviewService;
+import java.sql.SQLException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
-import java.util.List;
+import com.teamwork.kejizhai.bean.review;
+import com.teamwork.kejizhai.dao.ReviewDao;
+import com.teamwork.kejizhai.services.ReviewService;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -21,18 +22,18 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<review> getReviewsByItemId(int itemId) throws SQLException {
-        return reviewDao.getReviewsByItemId(itemId);
+    public List<review> getReviewsByItemId(String iid) throws SQLException {
+        return reviewDao.getReviewsByItemId(iid);
     }
 
     @Override
-    public List<review> getReviewsByUserId(String userId) throws SQLException {
-        return reviewDao.getReviewsByUserId(userId);
+    public List<review> getReviewsByUserId(String uid) throws SQLException {
+        return reviewDao.getReviewsByUserId(uid);
     }
 
     @Override
-    public review getReviewByOrderId(int orderId) throws SQLException {
-        return reviewDao.getReviewByOrderId(orderId);
+    public review getReviewByOrderId(String oid) throws SQLException {
+        return reviewDao.getReviewByOrderId(oid);
     }
 
     @Override
@@ -41,7 +42,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public boolean deleteReview(int reviewId) throws SQLException {
-        return reviewDao.deleteReview(reviewId);
+    public boolean deleteReview(String rid) throws SQLException {
+        return reviewDao.deleteReview(rid);
     }
 }

@@ -20,9 +20,9 @@ public class ReviewDaoImpl implements ReviewDao {
     // 评论RowMapper
     private RowMapper<review> reviewRowMapper = (ResultSet rs, int rowNum) -> {
         review r = new review();
-        r.setSid(rs.getInt("sid"));
-        r.setIid(rs.getInt("iid"));
-        r.setOid(rs.getInt("oid"));
+        r.setSid(rs.getString("sid"));
+        r.setIid(rs.getString("iid"));
+        r.setOid(rs.getString("oid"));
         r.setUid(rs.getString("uid"));
         r.setIreview(rs.getInt("ireview"));
         r.setIcomment(rs.getString("content"));
@@ -45,21 +45,21 @@ public class ReviewDaoImpl implements ReviewDao {
     }
 
     @Override
-    public List<review> getReviewsByItemId(int itemId) throws SQLException {
+    public List<review> getReviewsByItemId(String iid) throws SQLException {
         String sql = "SELECT * FROM reviews WHERE iid = ? ORDER BY review_date DESC";
-        return jdbcTemplate.query(sql, reviewRowMapper, itemId);
+        return jdbcTemplate.query(sql, reviewRowMapper, iid);
     }
 
     @Override
-    public List<review> getReviewsByUserId(String userId) throws SQLException {
+    public List<review> getReviewsByUserId(String uid) throws SQLException {
         String sql = "SELECT * FROM reviews WHERE uid = ? ORDER BY review_date DESC";
-        return jdbcTemplate.query(sql, reviewRowMapper, userId);
+        return jdbcTemplate.query(sql, reviewRowMapper, uid);
     }
 
     @Override
-    public review getReviewByOrderId(int orderId) throws SQLException {
+    public review getReviewByOrderId(String oid) throws SQLException {
         String sql = "SELECT * FROM reviews WHERE oid = ?";
-        List<review> reviews = jdbcTemplate.query(sql, reviewRowMapper, orderId);
+        List<review> reviews = jdbcTemplate.query(sql, reviewRowMapper, oid);
         return reviews.isEmpty() ? null : reviews.get(0);
     }
 
@@ -76,9 +76,9 @@ public class ReviewDaoImpl implements ReviewDao {
     }
 
     @Override
-    public boolean deleteReview(int reviewId) throws SQLException {
+    public boolean deleteReview(String rid) throws SQLException {
         String sql = "DELETE FROM reviews WHERE sid = ?";
-        int rowsAffected = jdbcTemplate.update(sql, reviewId);
+        int rowsAffected = jdbcTemplate.update(sql, rid);
         return rowsAffected > 0;
     }
 }

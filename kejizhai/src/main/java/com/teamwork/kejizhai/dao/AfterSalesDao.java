@@ -1,13 +1,14 @@
 package com.teamwork.kejizhai.dao;
 
-import com.teamwork.kejizhai.bean.AfterSales;
 import java.sql.SQLException;
 import java.util.List;
+
+import com.teamwork.kejizhai.bean.AfterSales;
 
 public interface AfterSalesDao {
     void addAfterSales(AfterSales afterSales) throws SQLException;
     void updateAfterSales(AfterSales afterSales) throws SQLException;
-    void deleteAfterSales(String userId, String orderId, String itemId) throws SQLException;
-    AfterSales getAfterSales(String userId, String orderId, String itemId) throws SQLException;
-    List<AfterSales> getAfterSalesByUserId(String userId) throws SQLException;
+    void deleteAfterSales(String uid, String oid, String iid) throws SQLException;
+    AfterSales getAfterSales(String uid, String oid, String iid) throws SQLException;
+    List<AfterSales> getAfterSalesByUserId(String uid) throws SQLException;
 }

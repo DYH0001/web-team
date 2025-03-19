@@ -1,18 +1,19 @@
 package com.teamwork.kejizhai.services.Impl;
 
-import com.teamwork.kejizhai.bean.Items;
-import com.teamwork.kejizhai.bean.Order;
-import com.teamwork.kejizhai.bean.Users;
-import com.teamwork.kejizhai.services.AfterSalesService;
-import com.teamwork.kejizhai.dao.AfterSalesDao;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.teamwork.kejizhai.bean.AfterSales;
-
-import java.sql.SQLException;
-import java.util.Date;
-
+import com.teamwork.kejizhai.bean.Items;
+import com.teamwork.kejizhai.bean.Order;
+import com.teamwork.kejizhai.bean.Users;
+import com.teamwork.kejizhai.dao.AfterSalesDao;
+import com.teamwork.kejizhai.services.AfterSalesService;
 @Service
 @Transactional
 public class AfterSalesServiceImpl implements AfterSalesService {
@@ -85,6 +86,16 @@ public class AfterSalesServiceImpl implements AfterSalesService {
             }
         } catch (SQLException e) {
             throw new RuntimeException("查询售后申请失败: " + e.getMessage());
+        }
+    }
+    
+    // 在实现类中添加以下方法
+    @Override
+    public List<AfterSales> getAfterSalesByUserId(String uid) {
+        try {
+            return afterSalesDao.getAfterSalesByUserId(uid);
+        } catch (SQLException e) {
+            throw new RuntimeException("获取用户售后申请列表失败: " + e.getMessage());
         }
     }
 }
