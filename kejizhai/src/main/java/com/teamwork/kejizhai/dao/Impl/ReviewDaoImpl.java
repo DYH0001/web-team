@@ -1,0 +1,84 @@
+package com.teamwork.kejizhai.dao.impl;
+
+import com.teamwork.kejizhai.bean.review;
+import com.teamwork.kejizhai.dao.ReviewDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+@Repository
+public class ReviewDaoImpl implements ReviewDao {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+    
+    // 评论RowMapper
+    private RowMapper<review> reviewRowMapper = (ResultSet rs, int rowNum) -> {
+        review r = new review();
+        r.setSid(rs.getInt("sid"));
+        r.setIid(rs.getInt("iid"));
+        r.setOid(rs.getInt("oid"));
+        r.setUid(rs.getString("uid"));
+        r.setIreview(rs.getInt("ireview"));
+        r.setContent(rs.getString("content"));
+        r.setReviewDate(rs.getTimestamp("review_date"));
+        return r;
+    };
+
+    @Override
+    public boolean addReview(review review) throws SQLException {
+        String sql = "INSERT INTO reviews (iid, oid, uid, ireview, content, review_date) VALUES (?, ?, ?, ?, ?, NOW())";
+        int rowsAffected = jdbcTemplate.update(
+            sql, 
+            review.getIid(), 
+            review.getOid(), 
+            review.getUid(), 
+            review.getIreview(), 
+            review.getContent()
+        );
+        return rowsAffected > 0;
+    }
+
+    @Override
+    public List<review> getReviewsByItemId(int itemId) throws SQLException {
+        String sql = "SELECT * FROM reviews WHERE iid = ? ORDER BY review_date DESC";
+        return jdbcTemplate.query(sql, reviewRowMapper, itemId);
+    }
+
+    @Override
+    public List<review> getReviewsByUserId(String userId) throws SQLException {
+        String sql = "SELECT * FROM reviews WHERE uid = ? ORDER BY review_date DESC";
+        return jdbcTemplate.query(sql, reviewRowMapper, userId);
+    }
+
+    @Override
+    public review getReviewByOrderId(int orderId) throws SQLException {
+        String sql = "SELECT * FROM reviews WHERE oid = ?";
+        List<review> reviews = jdbcTemplate.query(sql, reviewRowMapper, orderId);
+        return reviews.isEmpty() ? null : reviews.get(0);
+    }
+
+    @Override
+    public boolean updateReview(review review) throws SQLException {
+        String sql = "UPDATE reviews SET ireview = ?, content = ? WHERE sid = ?";
+        int rowsAffected = jdbcTemplate.update(
+            sql, 
+            review.getIreview(), 
+            review.getIcomment(), 
+            review.getSid()
+        );
+        return rowsAffected > 0;
+    }
+
+    @Override
+    public boolean deleteReview(int reviewId) throws SQLException {
+        String sql = "DELETE FROM reviews WHERE sid = ?";
+        int rowsAffected = jdbcTemplate.update(sql, reviewId);
+        return rowsAffected > 0;
+    }
+}
