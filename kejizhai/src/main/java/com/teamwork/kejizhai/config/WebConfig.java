@@ -1,32 +1,31 @@
 package com.teamwork.kejizhai.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
-
-    @Bean
-    public InternalResourceViewResolver viewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/views/");
-        resolver.setSuffix(".jsp");
-        return resolver;
-    }
     
+    // 确保默认Servlet处理器正确配置
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
     
+    // 明确指定静态资源位置
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/**")
+                .addResourceLocations(
+                    "classpath:/META-INF/resources/",
+                    "classpath:/resources/",
+                    "classpath:/static/",
+                    "classpath:/public/"
+                );
+                
+        // 特定资源映射
         registry.addResourceHandler("/img/**")
                 .addResourceLocations("classpath:/META-INF/resources/img/");
         
