@@ -7,14 +7,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-    
+
     // 确保默认Servlet处理器正确配置
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
     
-    // 明确指定静态资源位置
+    // 添加资源处理器配置
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
@@ -25,14 +25,10 @@ public class WebConfig implements WebMvcConfigurer {
                     "classpath:/public/"
                 );
                 
-        // 特定资源映射
+        // 特别处理图片资源
         registry.addResourceHandler("/img/**")
-                .addResourceLocations("classpath:/META-INF/resources/img/");
-        
-        registry.addResourceHandler("/css/**")
-                .addResourceLocations("classpath:/META-INF/resources/css/");
-                
-        registry.addResourceHandler("/js/**")
-                .addResourceLocations("classpath:/META-INF/resources/js/");
+                .addResourceLocations(
+                    "classpath:/META-INF/resources/img/"
+                );
     }
 }
