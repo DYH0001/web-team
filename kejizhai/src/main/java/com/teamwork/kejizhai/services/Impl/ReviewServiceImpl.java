@@ -1,4 +1,4 @@
-package com.teamwork.kejizhai.services.impl;
+package com.teamwork.kejizhai.services.Impl;
 
 import com.teamwork.kejizhai.bean.review;
 import com.teamwork.kejizhai.dao.ReviewDao;

@@ -80,13 +80,7 @@ public class AnalyticsController {
         }
     }
     
-    /**
-     * 获取用户在指定日期范围内的订单分析
-     * @param userId 用户ID
-     * @param startDate 开始日期
-     * @param endDate 结束日期
-     * @return 日期范围内的订单分析
-     */
+
     @GetMapping("/user/{userId}/orders")
     public ResponseEntity<?> getUserOrderAnalytics(
             @PathVariable String userId,
@@ -116,11 +110,7 @@ public class AnalyticsController {
         }
     }
     
-    /**
-     * 获取用户购买的商品分析
-     * @param userId 用户ID
-     * @return 用户购买商品分析
-     */
+
     @GetMapping("/user/{userId}/items")
     public ResponseEntity<?> getUserItemsAnalytics(@PathVariable String userId) {
         try {
@@ -171,11 +161,7 @@ public class AnalyticsController {
         }
     }
     
-    /**
-     * 构建错误响应
-     * @param message 错误信息
-     * @return 响应对象
-     */
+
     private Map<String, Object> errorResponse(String message) {
         Map<String, Object> response = new HashMap<>();
         response.put("status", "error");

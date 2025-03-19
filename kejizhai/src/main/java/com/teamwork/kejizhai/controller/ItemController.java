@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import com.teamwork.kejizhai.services.ItemService;
 
 @RestController  // 标记这是一个REST风格的Controller
 @RequestMapping("/api/items")  
+@CrossOrigin(origins = "*") // 添加跨域支持
 public class ItemController {
 
     @Autowired  

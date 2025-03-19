@@ -1,26 +1,29 @@
 package com.teamwork.kejizhai.bean;
 import java.util.List;
+import java.util.Date;
 
 public class review{
-    private int Iid;
-    private int Oid;
-    private int sid;
+    private String RId;
+    private String Iid;
+    private String Oid;
+    private String sid;
     private int Ireview;//0-5rank;
     private String Icomment;
     private String Uid;
+    private Date reviewDate;
 
 public review(){}
 
-// 添加缺少的setter方法
-public void setSid(int sid) {
+
+public void setSid(String sid) {
     this.sid = sid;
 }
 
-public void setIid(int iid) {
+public void setIid(String iid) {
     this.Iid = iid;
 }
 
-public void setOid(int oid) {
+public void setOid(String oid) {
     this.Oid = oid;
 }
 
@@ -38,7 +41,7 @@ public void setIcomment(String icomment) {
 }
 
 // 修正构造函数
-public review(int Iid, int Oid, int sid, int Ireview, String Icomment, String Uid) {
+public review(String Iid, String Oid, String sid, int Ireview, String Icomment, String Uid) {
     this.Iid = Iid;
     this.Oid = Oid;
     this.sid = sid;
@@ -47,17 +50,17 @@ public review(int Iid, int Oid, int sid, int Ireview, String Icomment, String Ui
     this.Uid = Uid;
 }
 
-public int getIid(){
+public String getIid(){
     return Iid;
 }
 
 
-public int getOid(){
+public String getOid(){
     return Oid;
 }
 
 
-public int getSid(){
+public String getSid(){
     return sid;
 }
 public int getIreview(){
@@ -69,9 +72,23 @@ public String getIcomment(){
 public String getUid(){
     return Uid;
 }
-public void setIcomment(int Iid,int Oid,String Uid){
+public void setIcomment(String Iid,String Oid,String Uid){
     this.Iid=Iid;
     this.Oid=Oid;
     this.Uid=Uid;
+}
+public Date getReviewDate() {
+    return reviewDate;
+}
+
+public void setReviewDate(Date reviewDate) {
+    this.reviewDate = reviewDate;
+}
+public String getRId() {
+    return RId;
+}
+
+public void setRId(String RId) {
+    this.RId = RId;
 }
 }

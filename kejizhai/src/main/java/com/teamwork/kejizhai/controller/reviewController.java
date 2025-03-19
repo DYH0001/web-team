@@ -17,11 +17,6 @@ public class reviewController {
     @Autowired
     private ReviewService reviewService;
 
-    /**
-     * 添加商品评论
-     * @param review 评论信息
-     * @return 添加结果
-     */
     @PostMapping
     public ResponseEntity<?> addReview(@RequestBody review review) {
         try {
@@ -36,45 +31,33 @@ public class reviewController {
         }
     }
 
-    /**
-     * 获取商品的所有评论
-     * @param itemId 商品ID
-     * @return 评论列表
-     */
+
     @GetMapping("/item/{itemId}")
     public ResponseEntity<?> getItemReviews(@PathVariable int itemId) {
         try {
-            List<review> reviews = reviewService.getReviewsByItemId(itemId);
+            List<review> reviews = ReviewService.getReviewsByItemId(itemId);
             return ResponseEntity.ok(successResponse(reviews));
         } catch (SQLException e) {
             return ResponseEntity.badRequest().body(errorResponse("获取商品评论失败: " + e.getMessage()));
         }
     }
 
-    /**
-     * 获取用户的所有评论
-     * @param userId 用户ID
-     * @return 评论列表
-     */
+
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> getUserReviews(@PathVariable String userId) {
         try {
-            List<review> reviews = reviewService.getReviewsByUserId(userId);
+            List<review> reviews = ReviewService.getReviewsByUserId(userId);
             return ResponseEntity.ok(successResponse(reviews));
         } catch (SQLException e) {
             return ResponseEntity.badRequest().body(errorResponse("获取用户评论失败: " + e.getMessage()));
         }
     }
 
-    /**
-     * 获取订单的评论
-     * @param orderId 订单ID
-     * @return 评论信息
-     */
+
     @GetMapping("/order/{orderId}")
     public ResponseEntity<?> getOrderReview(@PathVariable int orderId) {
         try {
-            review review = reviewService.getReviewByOrderId(orderId);
+            review review = ReviewService.getReviewByOrderId(orderId);
             if (review != null) {
                 return ResponseEntity.ok(successResponse(review));
             } else {
@@ -85,17 +68,12 @@ public class reviewController {
         }
     }
 
-    /**
-     * 更新评论
-     * @param reviewId 评论ID
-     * @param updatedReview 更新的评论信息
-     * @return 更新结果
-     */
+
     @PutMapping("/{reviewId}")
     public ResponseEntity<?> updateReview(@PathVariable int reviewId, @RequestBody review updatedReview) {
         try {
             updatedReview.setSid(reviewId);
-            boolean success = reviewService.updateReview(updatedReview);
+            boolean success = ReviewService.updateReview(updatedReview);
             if (success) {
                 return ResponseEntity.ok(successResponse("评论更新成功"));
             } else {
@@ -106,15 +84,11 @@ public class reviewController {
         }
     }
 
-    /**
-     * 删除评论
-     * @param reviewId 评论ID
-     * @return 删除结果
-     */
+
     @DeleteMapping("/{reviewId}")
-    public ResponseEntity<?> deleteReview(@PathVariable int reviewId) {
+    public ResponseEntity<?> deleteReview(@PathVariable String reviewId) {
         try {
-            boolean success = reviewService.deleteReview(reviewId);
+            boolean success = ReviewService.deleteReview(reviewId);
             if (success) {
                 return ResponseEntity.ok(successResponse("评论删除成功"));
             } else {
@@ -125,11 +99,7 @@ public class reviewController {
         }
     }
 
-    /**
-     * 构建成功响应
-     * @param data 响应数据
-     * @return 响应对象
-     */
+
     private Map<String, Object> successResponse(Object data) {
         Map<String, Object> response = new HashMap<>();
         response.put("status", "success");
@@ -137,11 +107,7 @@ public class reviewController {
         return response;
     }
 
-    /**
-     * 构建错误响应
-     * @param message 错误信息
-     * @return 响应对象
-     */
+
     private Map<String, Object> errorResponse(String message) {
         Map<String, Object> response = new HashMap<>();
         response.put("status", "error");

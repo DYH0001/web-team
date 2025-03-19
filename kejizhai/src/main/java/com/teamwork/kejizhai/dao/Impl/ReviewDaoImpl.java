@@ -1,4 +1,4 @@
-package com.teamwork.kejizhai.dao.impl;
+package com.teamwork.kejizhai.dao.Impl;
 
 import com.teamwork.kejizhai.bean.review;
 import com.teamwork.kejizhai.dao.ReviewDao;
@@ -25,7 +25,7 @@ public class ReviewDaoImpl implements ReviewDao {
         r.setOid(rs.getInt("oid"));
         r.setUid(rs.getString("uid"));
         r.setIreview(rs.getInt("ireview"));
-        r.setContent(rs.getString("content"));
+        r.setIcomment(rs.getString("content"));
         r.setReviewDate(rs.getTimestamp("review_date"));
         return r;
     };
@@ -39,7 +39,7 @@ public class ReviewDaoImpl implements ReviewDao {
             review.getOid(), 
             review.getUid(), 
             review.getIreview(), 
-            review.getContent()
+            review.getIcomment()
         );
         return rowsAffected > 0;
     }
