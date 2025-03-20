@@ -19,7 +19,6 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
                 .addResourceLocations(
-                    "classpath:/META-INF/resources/",
                     "classpath:/resources/",
                     "classpath:/static/",
                     "classpath:/public/"
@@ -27,12 +26,12 @@ public class WebConfig implements WebMvcConfigurer {
                 
         // 特定资源映射
         registry.addResourceHandler("/img/**")
-                .addResourceLocations("classpath:/META-INF/resources/img/");
+                .addResourceLocations("classpath:/resources/img/");
         
         registry.addResourceHandler("/css/**")
-                .addResourceLocations("classpath:/META-INF/resources/css/");
+                .addResourceLocations("classpath:/resources/css/");
                 
         registry.addResourceHandler("/js/**")
-                .addResourceLocations("classpath:/META-INF/resources/js/");
+                .addResourceLocations("classpath:/resources/js/");
     }
 }
