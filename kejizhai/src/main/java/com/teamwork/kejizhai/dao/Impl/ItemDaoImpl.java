@@ -16,10 +16,10 @@ public class ItemDaoImpl implements ItemDao {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Items> getItems(String iid) throws SQLException {
-        String sql = "SELECT * FROM items WHERE iid = ?";
+    public Items getItemsByName(String iname) throws SQLException {
+        String sql = "SELECT * FROM items WHERE iname = ?";
         try {
-            return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Items.class), iid);
+            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Items.class), iname);
         } catch (Exception e) {
             throw new SQLException("数据库查询失败", e);
         }
@@ -80,16 +80,6 @@ public class ItemDaoImpl implements ItemDao {
     }
 
     @Override
-    public List<Items> getItems() throws SQLException {
-        String sql = "SELECT * FROM items";
-        try {
-            return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Items.class));
-        } catch (Exception e) {
-            throw new SQLException("数据库查询失败", e);
-        }
-    }
-
-    @Override
     public int setIstatus(String iid) throws SQLException {
         String sql = "UPDATE items SET istatus = 1 WHERE iid = ?";
         try {
@@ -103,6 +93,14 @@ public class ItemDaoImpl implements ItemDao {
         String sql = "SELECT * FROM items WHERE iid = ?";
         try {
             return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Items.class), iid);
+        } catch (Exception e) {
+            throw new SQLException("数据库查询失败", e);
+        }
+    }
+    public List<Items> getAllItems() throws SQLException {
+        String sql = "SELECT * FROM items";
+        try {
+            return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Items.class));
         } catch (Exception e) {
             throw new SQLException("数据库查询失败", e);
         }

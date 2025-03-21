@@ -15,14 +15,13 @@ public class ItemServiceImpl implements ItemService {
     private ItemDao itemDao;
 
     @Override
-    public List<Items> getItems(String iid) throws SQLException {
+    public Items getItemByName(String iid) throws SQLException {
         try {
-            return itemDao.getItems(iid);
+            return itemDao.getItemsByName(iid);
         } catch (SQLException e) {
             throw new SQLException("获取商品信息失败: " + e.getMessage());
         }
     }
-
     @Override
     public boolean addItem(Items items) throws SQLException {
         try {
@@ -51,15 +50,6 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<Items> getItems() throws SQLException {
-        try {
-            return itemDao.getItems();
-        } catch (SQLException e) {
-            throw new SQLException("获取商品列表失败: " + e.getMessage());
-        }
-    }
-
-    @Override
     public int setIstatus(String iid) {
         try {
             return itemDao.setIstatus(iid);
@@ -73,6 +63,14 @@ public class ItemServiceImpl implements ItemService {
             return itemDao.getItemById(iid);
         } catch (SQLException e) {
             throw new SQLException("获取商品信息失败: " + e.getMessage());
+        }
+    }
+    @Override
+    public List<Items> getAllItems() throws SQLException {
+        try {
+            return itemDao.getAllItems();
+        } catch (SQLException e) {
+            throw new SQLException("获取所有商品信息失败: " + e.getMessage());
         }
     }
 }

@@ -28,11 +28,11 @@ public class ItemController {
     @GetMapping("/{iid}")  
     public ResponseEntity<?> getItem(@PathVariable String iid) {
         try {
-            List<Items> items = itemService.getItems(iid);
-            if (items.isEmpty()) {
+            Items items = itemService.getItemById(iid);
+            if (items==null) {
                 return ResponseEntity.notFound().build();
             }
-            return ResponseEntity.ok(items.get(0));
+            return ResponseEntity.ok(items);
         } catch (SQLException e) {
             return ResponseEntity.badRequest().body("获取商品信息失败: " + e.getMessage());
         }
@@ -40,7 +40,7 @@ public class ItemController {
     @GetMapping  // 处理 GET /api/items 请求
     public ResponseEntity<?> getAllItems() {
         try {
-            List<Items> items = itemService.getItems();
+            List<Items> items = itemService.getAllItems();
             return ResponseEntity.ok(items);
         } catch (SQLException e) {
             return ResponseEntity.badRequest().body("获取商品列表失败: " + e.getMessage());

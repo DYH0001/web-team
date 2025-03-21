@@ -41,7 +41,7 @@ public class AfterSaleController {
     public ResponseEntity<?> createAfterSales(@RequestBody Map<String, String> request) {
         try {
             String uid = request.get("uid");
-            String oid = request.get("oid"); // 修正了这里的错误，之前是 uid
+            String oid = request.get("oid");
             String iid = request.get("iid");
             String reason = request.get("reason");
             String type = request.get("type");
@@ -57,11 +57,10 @@ public class AfterSaleController {
             Order order = orders.get(0);
             
             // 从列表中获取单个商品
-            List<Items> items = itemService.getItems(iid);
-            if (items == null || items.isEmpty()) {
+            Items item = itemService.getItemById(iid);
+            if (item == null) {
                 return ResponseEntity.badRequest().body(errorResponse("商品不存在"));
             }
-            Items item = items.get(0);
             
             if (user == null) {
                 return ResponseEntity.badRequest().body(errorResponse("用户信息不存在"));
@@ -97,12 +96,12 @@ public class AfterSaleController {
             }
             Order order = orders.get(0);
             
-            // 从列表中获取单个商品
-            List<Items> items = itemService.getItems(itemId);
-            if (items == null || items.isEmpty()) {
+
+            Items item = itemService.getItemById(itemId);
+            if (item == null) {
                 return ResponseEntity.badRequest().body(errorResponse("商品不存在"));
             }
-            Items item = items.get(0);
+
             
             if (user == null) {
                 return ResponseEntity.badRequest().body(errorResponse("用户信息不存在"));
