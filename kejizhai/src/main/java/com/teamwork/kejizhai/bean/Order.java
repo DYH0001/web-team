@@ -6,6 +6,8 @@ import java.util.List;
 import com.teamwork.kejizhai.bean.Items;
 import com.teamwork.kejizhai.bean.Address;
 import com.teamwork.kejizhai.bean.Users;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 订单类
@@ -13,21 +15,42 @@ import com.teamwork.kejizhai.bean.Users;
  *
  */
 public class Order {
+    @Setter
+    @Getter
     private String Oid; //订单号
-    private Date orderDate;  
+    @Setter
+    @Getter
+    private Date orderDate;
     private String Uid; //userId
+    @Setter
+    @Getter
     private String orderNumber; //订单号
-    private List<Items> orderItems; 
+    @Setter
+    @Getter
+    private List<Items> orderItems;
+    @Getter
+    @Setter
     private double totalPrice;
     private Address orderAddress;
+    @Setter
+    @Getter
     private String payType;  //weixin,ali, bank
+    @Getter
     private int payStatus;  //paid=0,unpaid=1
+    @Setter
+    @Getter
     private String paymentId;  // 支付流水号
+    @Getter
     private String paymentResponse; // 支付响应信息 // 支付时间
+    @Getter
     private String deliveryStatus; //物流信息
+    @Getter
     private String deliveryCompany;//快递公司
+    @Getter
     private String deliveryNumber; //快递单号
+    @Getter
     private Date payDate;  //支付日期
+    @Getter
     private Date receiveDate; //收货日期
 
 
@@ -50,102 +73,38 @@ public class Order {
         this.receiveDate = receiveDate;
     }
 
-    public String getOid() {
-        return Oid;
-    }
-    public void setOid(String Oid) {
-        this.Oid = Oid;
-    }
-    public String getOrderNumber() {
-        return orderNumber;
-    }
-    public void setOrderNumber(String orderNumber) {
-        this.orderNumber = orderNumber;
-    }
-    public Date getOrderDate() {
-        return orderDate;
-    }
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
     public String getUserId() {
         return Uid;
     }
     public void setUserId(String Uid) {
         this.Uid = Uid;
     }
-    public List<Items> getOrderItems() {
-        return orderItems;
-    }
-    public void setOrderItems(List<Items> orderItems) {
-        this.orderItems = orderItems;
-    }
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
+
     public Address getAddress() {
         return orderAddress;
     }
     public void setAddress(Address orderAddress) {
         this.orderAddress = orderAddress;
     }
-    
-    public String getPayType() {
-        return payType;
-    }
-
-    public void setPayType(String payType) {
-        this.payType = payType;
-    }
-
-    // 添加新的 getter 和 setter
-    public String getPaymentId() {
-        return paymentId;
-    }
-
-    public void setPaymentId(String paymentId) {
-        this.paymentId = paymentId;
-    }
-
-    public String getPaymentResponse() {
-        return paymentResponse;
-    }
 
     public void setPaymentResponse(){
     }
 
-    public int getPayStatus() {
-        return payStatus;
-    }
-
     public void setPayStatus() {
     }
-    public String getDeliveryStatus() {
-        return deliveryStatus;
-    }
+
     public void setDeliveryStatus() {
     }
-    public String getDeliveryCompany() {
-        return deliveryCompany;
-    }
+
     public void setDeliveryCompany() {
     }
-    public String getDeliveryNumber() {
-        return deliveryNumber;
-    }
+
     public void setDeliveryNumber() {
     }
-    public Date getPayDate() {
-        return payDate;
-    }
+
     public void setPayDate() {
     }
-    public Date getReceiveDate() {
-        return receiveDate;
-    }
+
     public void setReceiveDate() {
     }
 }

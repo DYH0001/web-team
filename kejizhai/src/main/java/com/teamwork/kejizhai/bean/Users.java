@@ -2,16 +2,25 @@ package com.teamwork.kejizhai.bean;
 
 import com.teamwork.kejizhai.bean.Order;
 import com.teamwork.kejizhai.bean.Address;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
 
 public class Users {
+    // 添加缺失的 setter 方法
+    @Setter
+    @Getter
     private String Uid;
+    @Getter
     private String Uname;
+    @Getter
     private int age;
     private String password_Hash;
+    @Getter
     private String telephone;
     private enum role {
         guest,
@@ -23,8 +32,14 @@ public class Users {
 
     private boolean isPhoneVerified;
     private boolean isEmailVerified;
+    @Setter
+    @Getter
     private Date CreateTime;
+    @Setter
+    @Getter
     private Date UpdateTime;
+    @Setter
+    @Getter
     private List<Order> userOrders;
 
 public Users() {
@@ -44,18 +59,10 @@ public Users(String Uid, String Uname, int age, String address, String telephone
     }
 
 
-
-
-
-public String getUname() {
-    return Uname;
+    public void setUname(String Uname) {
 }
-public void setUname(String Uname) {
-}
-public int getAge() {
-    return age;
-}
-public void setAge(int age) {
+
+    public void setAge(int age) {
 
 }
 public String getAddress() {
@@ -63,10 +70,8 @@ public String getAddress() {
 }
 public void setAddress(String address) {
 }
-public String getTelephone() {
-    return telephone;
-}
-public void setTelephone(String telephone) {
+
+    public void setTelephone(String telephone) {
 }
 public String getPassword() {
     return password_Hash;
@@ -74,48 +79,18 @@ public String getPassword() {
 public void setPassword(String password) {
 }
 
-public String getUid() {
-    return Uid;
-}
-public boolean isPhoneVerified() {
+    public boolean isPhoneVerified() {
     return isPhoneVerified;
 }
 public boolean isEmailVerified() {
     return isEmailVerified;
 }
-public Date getCreateTime() {
-    return CreateTime;
-}
-public Date getUpdateTime() {
-    return UpdateTime;
-}
 
-// 添加缺失的 setter 方法
-public void setUid(String uid) {
-    this.Uid = uid;
-}
-
-public void setPhoneVerified(boolean isPhoneVerified) {
+    public void setPhoneVerified(boolean isPhoneVerified) {
     this.isPhoneVerified = isPhoneVerified;
 }
 
 public void setEmailVerified(boolean isEmailVerified) {
     this.isEmailVerified = isEmailVerified;
-}
-
-public void setCreateTime(Date createTime) {
-    this.CreateTime = createTime;
-}
-
-public void setUpdateTime(Date updateTime) {
-    this.UpdateTime = updateTime;
-}
-
-public List<Order> getUserOrders() {
-    return userOrders;
-}
-
-public void setUserOrders(List<Order> userOrders) {
-    this.userOrders = userOrders;
 }
 }

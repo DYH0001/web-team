@@ -1,16 +1,31 @@
 package com.teamwork.kejizhai.bean;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 public class Massage {
+    @Setter
+    @Getter
     private String senderId;
+    @Setter
+    @Getter
     private String massageId;
+    @Setter
+    @Getter
     private List<String> Content;
+    @Setter
+    @Getter
     private Date startTime;
+    @Setter
+    @Getter
     private Date endTime;
     private Optional<String> receiverId;
+    @Setter
+    @Getter
     private int MassageType;  //以后做消息内容识别判断是string还是int
 
     public Massage(){}
@@ -23,48 +38,11 @@ public class Massage {
         this.receiverId = receiverId;
         this.MassageType = MassageType;
     }
-    public String getSenderId(){
-        return senderId;
-    }
-    public void setSenderId(String senderId){
-        this.senderId = senderId;
-    }
-    public String getMassageId(){
-        return massageId;
-    }
-    public void setMassageId(String massageId){
-        this.massageId = massageId;
-    }
-    public List<String> getContent(){
-        return Content;
-    }
-    public void setContent(List<String> Content){
-        this.Content = Content;
-    }
-    public Date getStartTime(){
-        return startTime;
-    }
-    public void setStartTime(Date startTime){
-        this.startTime = startTime;
-    }   
-    public Date getEndTime(){
-        return endTime;
-    }
-    public void setEndTime(Date endTime){
-        this.endTime = endTime;
-    }
+
     public String getReceiverIdOrNull(){
         return receiverId.orElse(null);
     }   
     public void setReceiverId(String receiverId){
         this.receiverId = Optional.ofNullable(receiverId);
     }
-    public int getMassageType(){
-        return MassageType;
-    }
-    public void setMassageType(int MassageType){
-        this.MassageType = MassageType;
-    }
-
-
 }

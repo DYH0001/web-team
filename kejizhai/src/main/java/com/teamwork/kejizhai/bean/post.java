@@ -1,9 +1,15 @@
 package com.teamwork.kejizhai.bean;
 
+import lombok.Setter;
+
 public class post {
+    @Setter
     private String postId; // 帖子的id
+    @Setter
     private String postTitle; // 帖子标题
+    @Setter
     private String postContent; // 帖子内容
+    @Setter
     private String postAuthor; // 帖子作者
     private int likeNum = 0; // 点赞数
     private int commentNum = 0; // 评论数
@@ -22,32 +28,16 @@ public class post {
         return postId;
     }
 
-    public void setPostId(String postId) {
-        this.postId = postId;
-    }
-
     public String getPostTitle() {
         return postTitle;
-    }
-
-    public void setPostTitle(String postTitle) {
-        this.postTitle = postTitle;
     }
 
     public String getPostContent() {
         return postContent;
     }
 
-    public void setPostContent(String postContent) {
-        this.postContent = postContent;
-    }
-
     public String getPostAuthor() {
         return postAuthor;
-    }
-
-    public void setPostAuthor(String postAuthor) {
-        this.postAuthor = postAuthor;
     }
 
     public int getLikeNum() {

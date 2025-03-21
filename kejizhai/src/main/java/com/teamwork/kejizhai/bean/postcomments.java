@@ -1,12 +1,17 @@
 package com.teamwork.kejizhai.bean;
 
+import lombok.Setter;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class postcomments {
+    @Setter
     private int commentId;// 评论id
+    @Setter
     private BufferedReader commentContent;// 评论内容
+    @Setter
     private String commentAuthor;// 评论作者
     private int likeNum = 0;// 点赞数
     private int commentNum = 0;// 评论数
@@ -24,24 +29,12 @@ public class postcomments {
         return commentId;
     }
 
-    public void setCommentId(int commentId) {
-        this.commentId = commentId;
-    }
-
     public BufferedReader getCommentContent() {
         return commentContent;
     }
 
-    public void setCommentContent(BufferedReader commentContent) {
-        this.commentContent = commentContent;
-    }
-
     public String getCommentAuthor() {
         return commentAuthor;
-    }
-
-    public void setCommentAuthor(String commentAuthor) {
-        this.commentAuthor = commentAuthor;
     }
 
     public int getLikeNum() {
