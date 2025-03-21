@@ -29,10 +29,10 @@ public class ItemController {
 
     @Autowired  
     private ItemService itemService;
-    @GetMapping("/{iid}")  
-    public ResponseEntity<?> getItem(@PathVariable String iid) {
+    @GetMapping("/{Iid}")  
+    public ResponseEntity<?> getItem(@PathVariable String Iid) {
         try {
-            Items items = itemService.getItemById(iid);
+            Items items = itemService.getItemById(Iid);
             if (items==null) {
                 return ResponseEntity.notFound().build();
             }
@@ -78,10 +78,10 @@ public class ItemController {
         }
     }
 
-     @DeleteMapping("/{iid}")  // 处理 DELETE /api/items/{iid} 请求
-    public ResponseEntity<?> deleteItem(@PathVariable String iid) {
+     @DeleteMapping("/{Iid}")  // 处理 DELETE /api/items/{Iid} 请求
+    public ResponseEntity<?> deleteItem(@PathVariable String Iid) {
         try {
-            boolean success = itemService.deleteItem(iid);
+            boolean success = itemService.deleteItem(Iid);
             if (success) {
                 return ResponseEntity.ok("商品删除成功");
             } else {
@@ -101,10 +101,10 @@ public class ItemController {
         }
     }
  
-    @PutMapping("/{iid}/status")  // 处理 PUT /api/items/{iid}/status 请求
-    public ResponseEntity<?> setItemStatus(@PathVariable String iid) {
+    @PutMapping("/{Iid}/status")  // 处理 PUT /api/items/{Iid}/status 请求
+    public ResponseEntity<?> setItemStatus(@PathVariable String Iid) {
         try {
-            int result = itemService.setIstatus(iid);
+            int result = itemService.setIstatus(Iid);
             if (result > 0) {
                 return ResponseEntity.ok("商品状态更新成功");
             } else {
@@ -120,7 +120,7 @@ public class ItemController {
 
     @PostMapping("/upload-image")
     public ResponseEntity<?> uploadItemImage(@RequestParam("file") MultipartFile file, 
-                                             @RequestParam("iid") String iid) {
+                                             @RequestParam("Iid") String Iid) {
         try {
             // 存储文件并获取文件名和哈希值
             String fileInfo = fileStorageConfig.storeFile(file);
@@ -129,7 +129,7 @@ public class ItemController {
             String fileHash = parts[1];
             
             // 更新商品图片信息
-            Items item = itemService.getItemById(iid);
+            Items item = itemService.getItemById(Iid);
             if (item != null) {
                 item.setIimage("/uploads/" + fileName);
                 item.setImageHash(fileHash); // 假设Items类中有imageHash字段

@@ -15,9 +15,9 @@ public class ItemServiceImpl implements ItemService {
     private ItemDao itemDao;
 
     @Override
-    public Items getItemByName(String iid) throws SQLException {
+    public Items getItemByName(String Iid) throws SQLException {
         try {
-            return itemDao.getItemsByName(iid);
+            return itemDao.getItemsByName(Iid);
         } catch (SQLException e) {
             throw new SQLException("获取商品信息失败: " + e.getMessage());
         }
@@ -41,26 +41,26 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public boolean deleteItem(String iid) throws SQLException {
+    public boolean deleteItem(String Iid) throws SQLException {
         try {
-            return itemDao.deleteItem(iid);
+            return itemDao.deleteItem(Iid);
         } catch (SQLException e) {
             throw new SQLException("下架商品失败: " + e.getMessage());
         }
     }
 
     @Override
-    public int setIstatus(String iid) {
+    public int setIstatus(String Iid) {
         try {
-            return itemDao.setIstatus(iid);
+            return itemDao.setIstatus(Iid);
         } catch (Exception e) {
             return 0; // 设置状态失败返回0
         }
     }
     @Override
-    public Items getItemById(String iid) throws SQLException {
+    public Items getItemById(String Iid) throws SQLException {
         try {
-            return itemDao.getItemById(iid);
+            return itemDao.getItemById(Iid);
         } catch (SQLException e) {
             throw new SQLException("获取商品信息失败: " + e.getMessage());
         }

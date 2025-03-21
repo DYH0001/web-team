@@ -22,8 +22,8 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<review> getReviewsByItemId(String iid) throws SQLException {
-        return reviewDao.getReviewsByItemId(iid);
+    public List<review> getReviewsByItemId(String Iid) throws SQLException {
+        return reviewDao.getReviewsByItemId(Iid);
     }
 
     @Override

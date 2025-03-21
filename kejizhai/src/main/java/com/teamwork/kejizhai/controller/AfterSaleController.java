@@ -42,7 +42,7 @@ public class AfterSaleController {
         try {
             String uid = request.get("uid");
             String oid = request.get("oid");
-            String iid = request.get("iid");
+            String Iid = request.get("Iid");
             String reason = request.get("reason");
             String type = request.get("type");
             
@@ -57,7 +57,7 @@ public class AfterSaleController {
             Order order = orders.get(0);
             
             // 从列表中获取单个商品
-            Items item = itemService.getItemById(iid);
+            Items item = itemService.getItemById(Iid);
             if (item == null) {
                 return ResponseEntity.badRequest().body(errorResponse("商品不存在"));
             }

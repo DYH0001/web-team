@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Items {
     @JsonProperty("Iid")
-    private String iid;
+    private String Iid;
     
     @JsonProperty("Iname")
     private String Iname;
@@ -19,8 +19,8 @@ public class Items {
     private String imageHash;
 
     public Items() {};
-public Items(String iid, String Iname, double price, String description, String Iimage, String category, String shop, String uptime, int Istatus) {
-    this.iid = iid;
+public Items(String Iid, String Iname, double price, String description, String Iimage, String category, String shop, String uptime, int Istatus) {
+    this.Iid = Iid;
     this.Iname = Iname;
     this.price = price;
     this.description = description;
@@ -40,7 +40,7 @@ public Items(String iid, String Iname, double price, String description, String 
     }
 
     public String getIid() {
-        return iid;
+        return Iid;
     }
     public String getIname(String Iid){
         return Iname;

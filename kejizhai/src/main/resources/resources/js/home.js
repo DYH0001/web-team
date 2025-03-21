@@ -75,8 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const productCard = document.createElement('div');
             productCard.className = 'product-card';
             productCard.innerHTML = `
-                <img src="${items.iimage}" alt="${items.iname}">
-                <div class="name">${items.iname}</div>
+                <img src="${items.iimage}" alt="${items.Iname}">
+                <div class="name">${items.Iname}</div>
                 <div class="price">${items.price}</div>
             `;
             productContainer.appendChild(productCard);

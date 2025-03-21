@@ -9,10 +9,10 @@ public class shop {
     public shop() {
     }
 
-public shop(String sid, String uid, String iid, int count, int inum) {
+public shop(String sid, String uid, String Iid, int count, int inum) {
         this.sid = sid;
         this.uid = uid;
-        this.Iid = iid;
+        this.Iid = Iid;
         this.count = count;
         this.inum = inum;
     }

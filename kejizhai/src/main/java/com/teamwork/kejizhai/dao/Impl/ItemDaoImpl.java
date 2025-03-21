@@ -48,7 +48,7 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public boolean updateItem(Items items) throws SQLException {
-        String sql = "UPDATE items SET Iname=?, price=?, description=?, info=?, iimage=?, category=?, shop=?, uptime=?, istatus=? WHERE iid=?";
+        String sql = "UPDATE items SET Iname=?, price=?, description=?, info=?, iimage=?, category=?, shop=?, uptime=?, istatus=? WHERE Iid=?";
         try {
             int result = jdbcTemplate.update(sql,
                 items.getIname(""),
@@ -69,10 +69,10 @@ public class ItemDaoImpl implements ItemDao {
     }
 
     @Override
-    public boolean deleteItem(String iid) throws SQLException {
-        String sql = "DELETE FROM items WHERE iid = ?";
+    public boolean deleteItem(String Iid) throws SQLException {
+        String sql = "DELETE FROM items WHERE Iid = ?";
         try {
-            int result = jdbcTemplate.update(sql, iid);
+            int result = jdbcTemplate.update(sql, Iid);
             return result > 0;
         } catch (Exception e) {
             throw new SQLException("数据库删除失败", e);
@@ -80,19 +80,19 @@ public class ItemDaoImpl implements ItemDao {
     }
 
     @Override
-    public int setIstatus(String iid) throws SQLException {
-        String sql = "UPDATE items SET istatus = 1 WHERE iid = ?";
+    public int setIstatus(String Iid) throws SQLException {
+        String sql = "UPDATE items SET istatus = 1 WHERE Iid = ?";
         try {
-            return jdbcTemplate.update(sql, iid);
+            return jdbcTemplate.update(sql, Iid);
         } catch (Exception e) {
             throw new SQLException("更新商品状态失败", e);
         }
     }
     @Override
-    public Items getItemById(String iid) throws SQLException {
-        String sql = "SELECT * FROM items WHERE iid = ?";
+    public Items getItemById(String Iid) throws SQLException {
+        String sql = "SELECT * FROM items WHERE Iid = ?";
         try {
-            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Items.class), iid);
+            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Items.class), Iid);
         } catch (Exception e) {
             throw new SQLException("数据库查询失败", e);
         }
