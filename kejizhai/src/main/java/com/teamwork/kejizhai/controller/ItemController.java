@@ -2,6 +2,7 @@ package com.teamwork.kejizhai.controller;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;  // 添加这个导入用于Map.of()
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;  // 添加这个导入
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;  // 添加这个导入
 
 import com.teamwork.kejizhai.bean.Items;
 import com.teamwork.kejizhai.services.ItemService;
+import com.teamwork.kejizhai.config.FileStorageConfig;
 
 @RestController  // 标记这是一个REST风格的Controller
 @RequestMapping("/api/items")  
@@ -87,6 +91,15 @@ public class ItemController {
             return ResponseEntity.badRequest().body("删除商品失败: " + e.getMessage());
         }
     }
+    @GetMapping("/{Iname}")
+    public ResponseEntity<?> getItemByName(@PathVariable String Iname) {
+        try {
+            Items items = itemService.getItemByName(Iname);
+            return ResponseEntity.ok(items);
+        } catch (SQLException e) {
+            return ResponseEntity.badRequest().body("获取商品信息失败: " + e.getMessage());
+        }
+    }
  
     @PutMapping("/{iid}/status")  // 处理 PUT /api/items/{iid}/status 请求
     public ResponseEntity<?> setItemStatus(@PathVariable String iid) {
@@ -99,6 +112,39 @@ public class ItemController {
             }
         } catch (SQLException e) {
             return ResponseEntity.badRequest().body("更新商品状态失败: " + e.getMessage());
+        }
+    }
+
+    @Autowired
+    private FileStorageConfig fileStorageConfig;
+
+    @PostMapping("/upload-image")
+    public ResponseEntity<?> uploadItemImage(@RequestParam("file") MultipartFile file, 
+                                             @RequestParam("iid") String iid) {
+        try {
+            // 存储文件并获取文件名和哈希值
+            String fileInfo = fileStorageConfig.storeFile(file);
+            String[] parts = fileInfo.split(":");
+            String fileName = parts[0];
+            String fileHash = parts[1];
+            
+            // 更新商品图片信息
+            Items item = itemService.getItemById(iid);
+            if (item != null) {
+                item.setIimage("/uploads/" + fileName);
+                item.setImageHash(fileHash); // 假设Items类中有imageHash字段
+                itemService.updateItem(item);
+                
+                return ResponseEntity.ok(Map.of(
+                    "fileName", fileName,
+                    "fileHash", fileHash,
+                    "url", "/uploads/" + fileName
+                ));
+            } else {
+                return ResponseEntity.badRequest().body("商品不存在");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("上传图片失败: " + e.getMessage());
         }
     }
 }

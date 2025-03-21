@@ -190,5 +190,7 @@ VALUES ('科技数码店', 'seller001', '专营各类数码科技产品', NOW())
 
 COMMIT;
 
+ALTER TABLE items ADD COLUMN image_hash VARCHAR(32);
+
 -- 完成数据库初始化
 SELECT 'kejizhai数据库初始化完成' AS '状态';
