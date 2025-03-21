@@ -1,7 +1,12 @@
 package com.teamwork.kejizhai.bean;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Items {
+    @JsonProperty("iid")
     private String Iid;
+    
+    @JsonProperty("iname")
     private String Iname;
     private double price;
     private String description; //商品描述
