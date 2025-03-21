@@ -6,11 +6,12 @@ import lombok.Setter;
 
 public class Items {
     @Getter
-    @JsonProperty("Iid")
+    @Setter
+    @JsonProperty("iid")
     private String Iid;
 
     @Setter
-    @JsonProperty("Iname")
+    @JsonProperty("iname")
     private String Iname;
     @Setter
     @Getter
@@ -53,9 +54,7 @@ public class Items {
         this.uptime = uptime;
         this.Istatus = Istatus;// 图片MD5哈希值
     }
-
-    public String getIname(String Iid) {
+    public String getIname(String s) {
         return Iname;
     }
-
 }
