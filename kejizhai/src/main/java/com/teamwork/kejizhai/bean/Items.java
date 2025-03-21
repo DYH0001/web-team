@@ -3,8 +3,8 @@ package com.teamwork.kejizhai.bean;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Items {
-    @JsonProperty("iid")
-    private String Iid;
+    @JsonProperty("Iid")
+    private String iid;
     
     @JsonProperty("iname")
     private String Iname;
@@ -18,8 +18,8 @@ public class Items {
     private int Istatus;  //show=0;hide=1;undercarriage=3;
 
     public Items() {};
-public Items(String Iid, String Iname, double price, String description, String Iimage, String category, String shop, String uptime, int Istatus) {
-    this.Iid = Iid;
+public Items(String iid, String Iname, double price, String description, String Iimage, String category, String shop, String uptime, int Istatus) {
+    this.iid = iid;
     this.Iname = Iname;
     this.price = price;
     this.description = description;
@@ -31,7 +31,7 @@ public Items(String Iid, String Iname, double price, String description, String 
 
 }
 public String getIid() {
-    return Iid;
+    return iid;
 }
 public String getIname(String Iid){
     return Iname;
