@@ -192,5 +192,15 @@ COMMIT;
 
 ALTER TABLE items ADD COLUMN image_hash VARCHAR(32);
 
+-- 修改字段名为大写I开头
+ALTER TABLE items CHANGE COLUMN iid Iid VARCHAR(50);
+ALTER TABLE items CHANGE COLUMN iname Iname VARCHAR(100);
+ALTER TABLE items CHANGE COLUMN iimage Iimage VARCHAR(255);
+ALTER TABLE items CHANGE COLUMN istatus Istatus INT;
+
+-- 更新相关索引（如果有）
+DROP INDEX idx_items_iid ON items;
+CREATE INDEX idx_items_Iid ON items(Iid);
+
 -- 完成数据库初始化
 SELECT 'kejizhai数据库初始化完成' AS '状态';

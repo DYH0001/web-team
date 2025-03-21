@@ -29,7 +29,7 @@ public class ItemController {
 
     @Autowired  
     private ItemService itemService;
-    @GetMapping("/{Iid}")  
+    @GetMapping("/{Iid}")  // 确保使用大写I开头
     public ResponseEntity<?> getItem(@PathVariable String Iid) {
         try {
             Items items = itemService.getItemById(Iid);
@@ -101,7 +101,7 @@ public class ItemController {
         }
     }
  
-    @PutMapping("/{Iid}/status")  // 处理 PUT /api/items/{Iid}/status 请求
+    @PutMapping("/{Iid}/status")  // 确保使用大写I开头
     public ResponseEntity<?> setItemStatus(@PathVariable String Iid) {
         try {
             int result = itemService.setIstatus(Iid);

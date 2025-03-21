@@ -3,10 +3,10 @@ package com.teamwork.kejizhai.bean;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Items {
-    @JsonProperty("Iid")
+
     private String Iid;
     
-    @JsonProperty("Iname")
+
     private String Iname;
     private double price;
     private String description; //商品描述
@@ -16,7 +16,7 @@ public class Items {
     private String shop;
     private String uptime;
     private int Istatus;  //show=0;hide=1;undercarriage=3;
-    private String imageHash;
+    private String ImageHash;
 
     public Items() {};
 public Items(String Iid, String Iname, double price, String description, String Iimage, String category, String shop, String uptime, int Istatus) {
@@ -32,11 +32,11 @@ public Items(String Iid, String Iname, double price, String description, String 
     }    
     // 添加getter和setter
     public String getImageHash() {
-        return imageHash;
+        return ImageHash;
     }
     
-    public void setImageHash(String imageHash) {
-        this.imageHash = imageHash;
+    public void setImageHash(String ImageHash) {
+        this.ImageHash = ImageHash;
     }
 
     public String getIid() {
@@ -45,7 +45,10 @@ public Items(String Iid, String Iname, double price, String description, String 
     public String getIname(String Iid){
         return Iname;
     }
-    public void setIname(String Iid){}
+    public void setIname(){
+        this.Iname=Iname;
+    }
+    public void setIname(String Iname){}
     public double getPrice() {
         return price;
     }
