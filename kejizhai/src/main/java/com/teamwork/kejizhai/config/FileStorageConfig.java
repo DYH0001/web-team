@@ -25,7 +25,21 @@ public class FileStorageConfig {
     
     private Path fileStoragePath;
     
+    // 修改方法返回类型为Path，并保留@Bean注解
     @Bean
+    public Path init() {
+        this.fileStoragePath = Paths.get(uploadDir).toAbsolutePath().normalize();
+        try {
+            Files.createDirectories(this.fileStoragePath);
+            return this.fileStoragePath;
+        } catch (IOException e) {
+            throw new RuntimeException("无法创建文件上传目录", e);
+        }
+    }
+    
+    // 或者使用@PostConstruct替代@Bean
+    /*
+    @PostConstruct
     public void init() {
         this.fileStoragePath = Paths.get(uploadDir).toAbsolutePath().normalize();
         try {
@@ -34,6 +48,7 @@ public class FileStorageConfig {
             throw new RuntimeException("无法创建文件上传目录", e);
         }
     }
+    */
     
     public String storeFile(MultipartFile file) {
         try {
