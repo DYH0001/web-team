@@ -6,7 +6,7 @@ public class Items {
     @JsonProperty("Iid")
     private String iid;
     
-    @JsonProperty("iname")
+    @JsonProperty("Iname")
     private String Iname;
     private double price;
     private String description; //商品描述

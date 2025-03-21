@@ -16,10 +16,10 @@ public class ItemDaoImpl implements ItemDao {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public Items getItemsByName(String iname) throws SQLException {
-        String sql = "SELECT * FROM items WHERE iname = ?";
+    public Items getItemsByName(String Iname) throws SQLException {
+        String sql = "SELECT * FROM items WHERE Iname = ?";
         try {
-            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Items.class), iname);
+            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Items.class), Iname);
         } catch (Exception e) {
             throw new SQLException("数据库查询失败", e);
         }
@@ -27,7 +27,7 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public boolean addItem(Items items) throws SQLException {
-        String sql = "INSERT INTO items (iname, price, description, info, iimage, category, shop, uptime, istatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO items (Iname, price, description, info, iimage, category, shop, uptime, istatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             int result = jdbcTemplate.update(sql,
                 items.getIname(""),
@@ -48,7 +48,7 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public boolean updateItem(Items items) throws SQLException {
-        String sql = "UPDATE items SET iname=?, price=?, description=?, info=?, iimage=?, category=?, shop=?, uptime=?, istatus=? WHERE iid=?";
+        String sql = "UPDATE items SET Iname=?, price=?, description=?, info=?, iimage=?, category=?, shop=?, uptime=?, istatus=? WHERE iid=?";
         try {
             int result = jdbcTemplate.update(sql,
                 items.getIname(""),
