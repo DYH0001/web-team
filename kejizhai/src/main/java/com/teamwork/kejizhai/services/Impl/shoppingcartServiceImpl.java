@@ -10,7 +10,7 @@ import com.teamwork.kejizhai.bean.shoppingcart;
 import com.teamwork.kejizhai.dao.shoppingcartDao;
 import com.teamwork.kejizhai.services.shoppingcartService;
 @Service
-public class shoppingcartImpl implements shoppingcartService {
+public class shoppingcartServiceImpl implements shoppingcartService {
     
     @Autowired
     private shoppingcartDao shoppingcartDao;
