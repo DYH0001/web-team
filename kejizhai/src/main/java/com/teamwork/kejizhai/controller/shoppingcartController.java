@@ -19,10 +19,15 @@ import com.teamwork.kejizhai.services.shoppingcartService;
 
 @RestController
 @RequestMapping("/api/shoppingcart")
-public class shoppingcartController{
+public class shoppingcartController {
     @Autowired
     private shoppingcartService shoppingcartService;
 
+    @GetMapping
+    public ResponseEntity<?> index() {
+        return ResponseEntity.ok().body("购物车服务正常运行");
+    }
+    
     /**
      * 添加商品到购物车
      * @param shoppingcart 购物车对象
