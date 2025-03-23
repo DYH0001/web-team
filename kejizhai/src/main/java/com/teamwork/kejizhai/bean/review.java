@@ -19,8 +19,8 @@ public void setSid(String sid) {
     this.sid = sid;
 }
 
-public void setIid(String iid) {
-    this.Iid = iid;
+public void setIid(String Iid) {
+    this.Iid = Iid;
 }
 
 public void setOid(String oid) {

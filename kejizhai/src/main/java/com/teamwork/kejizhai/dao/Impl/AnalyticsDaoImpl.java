@@ -37,7 +37,7 @@ public class AnalyticsDaoImpl implements AnalyticsDao {
     @Override
     public List<Items> getUserPurchasedItems(String userId) throws SQLException {
         String sql = "SELECT DISTINCT i.* FROM items i " +
-                    "JOIN order_items oi ON i.iid = oi.item_id " +
+                    "JOIN order_items oi ON i.Iid = oi.item_id " +
                     "JOIN orders o ON oi.order_id = o.oid " +
                     "WHERE o.uid = ? AND o.pay_status = 0";
         try {
@@ -63,7 +63,7 @@ public class AnalyticsDaoImpl implements AnalyticsDao {
 
     @Override
     public double getItemCost(String itemId) throws SQLException {
-        String sql = "SELECT cost_price FROM items WHERE iid = ?";
+        String sql = "SELECT cost_price FROM items WHERE Iid = ?";
         try {
             return jdbcTemplate.queryForObject(sql, Double.class, itemId);
         } catch (Exception e) {

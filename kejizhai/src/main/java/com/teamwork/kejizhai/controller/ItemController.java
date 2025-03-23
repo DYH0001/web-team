@@ -2,6 +2,7 @@ package com.teamwork.kejizhai.controller;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;  // 添加这个导入用于Map.of()
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;  // 添加这个导入
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;  // 添加这个导入
 
 import com.teamwork.kejizhai.bean.Items;
 import com.teamwork.kejizhai.services.ItemService;
+import com.teamwork.kejizhai.config.FileStorageConfig;
 
 @RestController  // 标记这是一个REST风格的Controller
 @RequestMapping("/api/items")  
@@ -25,14 +29,14 @@ public class ItemController {
 
     @Autowired  
     private ItemService itemService;
-    @GetMapping("/{iid}")  
-    public ResponseEntity<?> getItem(@PathVariable String iid) {
+    @GetMapping("/{Iid}")  // 确保使用大写I开头
+    public ResponseEntity<?> getItem(@PathVariable String Iid) {
         try {
-            List<Items> items = itemService.getItems(iid);
-            if (items.isEmpty()) {
+            Items items = itemService.getItemById(Iid);
+            if (items==null) {
                 return ResponseEntity.notFound().build();
             }
-            return ResponseEntity.ok(items.get(0));
+            return ResponseEntity.ok(items);
         } catch (SQLException e) {
             return ResponseEntity.badRequest().body("获取商品信息失败: " + e.getMessage());
         }
@@ -40,7 +44,7 @@ public class ItemController {
     @GetMapping  // 处理 GET /api/items 请求
     public ResponseEntity<?> getAllItems() {
         try {
-            List<Items> items = itemService.getItems();
+            List<Items> items = itemService.getAllItems();
             return ResponseEntity.ok(items);
         } catch (SQLException e) {
             return ResponseEntity.badRequest().body("获取商品列表失败: " + e.getMessage());
@@ -74,10 +78,10 @@ public class ItemController {
         }
     }
 
-     @DeleteMapping("/{iid}")  // 处理 DELETE /api/items/{iid} 请求
-    public ResponseEntity<?> deleteItem(@PathVariable String iid) {
+     @DeleteMapping("/{Iid}")  // 处理 DELETE /api/items/{Iid} 请求
+    public ResponseEntity<?> deleteItem(@PathVariable String Iid) {
         try {
-            boolean success = itemService.deleteItem(iid);
+            boolean success = itemService.deleteItem(Iid);
             if (success) {
                 return ResponseEntity.ok("商品删除成功");
             } else {
@@ -87,11 +91,20 @@ public class ItemController {
             return ResponseEntity.badRequest().body("删除商品失败: " + e.getMessage());
         }
     }
- 
-    @PutMapping("/{iid}/status")  // 处理 PUT /api/items/{iid}/status 请求
-    public ResponseEntity<?> setItemStatus(@PathVariable String iid) {
+    @GetMapping("/{Iname}")
+    public ResponseEntity<?> getItemByName(@PathVariable String Iname) {
         try {
-            int result = itemService.setIstatus(iid);
+            Items items = itemService.getItemByName(Iname);
+            return ResponseEntity.ok(items);
+        } catch (SQLException e) {
+            return ResponseEntity.badRequest().body("获取商品信息失败: " + e.getMessage());
+        }
+    }
+ 
+    @PutMapping("/{Iid}/status")  // 确保使用大写I开头
+    public ResponseEntity<?> setItemStatus(@PathVariable String Iid) {
+        try {
+            int result = itemService.setIstatus(Iid);
             if (result > 0) {
                 return ResponseEntity.ok("商品状态更新成功");
             } else {
@@ -99,6 +112,39 @@ public class ItemController {
             }
         } catch (SQLException e) {
             return ResponseEntity.badRequest().body("更新商品状态失败: " + e.getMessage());
+        }
+    }
+
+    @Autowired
+    private FileStorageConfig fileStorageConfig;
+
+    @PostMapping("/upload-image")
+    public ResponseEntity<?> uploadItemImage(@RequestParam("file") MultipartFile file, 
+                                             @RequestParam("Iid") String Iid) {
+        try {
+            // 存储文件并获取文件名和哈希值
+            String fileInfo = fileStorageConfig.storeFile(file);
+            String[] parts = fileInfo.split(":");
+            String fileName = parts[0];
+            String fileHash = parts[1];
+            
+            // 更新商品图片信息
+            Items item = itemService.getItemById(Iid);
+            if (item != null) {
+                item.setIimage("/uploads/" + fileName);
+                item.setImageHash(fileHash); // 假设Items类中有imageHash字段
+                itemService.updateItem(item);
+                
+                return ResponseEntity.ok(Map.of(
+                    "fileName", fileName,
+                    "fileHash", fileHash,
+                    "url", "/uploads/" + fileName
+                ));
+            } else {
+                return ResponseEntity.badRequest().body("商品不存在");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("上传图片失败: " + e.getMessage());
         }
     }
 }

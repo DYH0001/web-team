@@ -46,8 +46,8 @@ CREATE TABLE IF NOT EXISTS shop (
 
 -- 商品表
 CREATE TABLE IF NOT EXISTS items (
-    iid INT AUTO_INCREMENT PRIMARY KEY,
-    iname VARCHAR(100) NOT NULL,
+    Iid INT AUTO_INCREMENT PRIMARY KEY,
+    Iname VARCHAR(100) NOT NULL,
     price DECIMAL(10,2) NOT NULL,
     cost_price DECIMAL(10,2),
     description TEXT,
@@ -86,31 +86,31 @@ CREATE TABLE IF NOT EXISTS order_items (
     quantity INT NOT NULL,
     price DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (order_id) REFERENCES orders(oid) ON DELETE CASCADE,
-    FOREIGN KEY (item_id) REFERENCES items(iid) ON DELETE CASCADE
+    FOREIGN KEY (item_id) REFERENCES items(Iid) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 购物车表
 CREATE TABLE IF NOT EXISTS shopping_cart (
     scid INT AUTO_INCREMENT PRIMARY KEY,
     uid VARCHAR(50) NOT NULL,
-    iid INT NOT NULL,
+    Iid INT NOT NULL,
     count INT NOT NULL,
     price DECIMAL(10,2) NOT NULL,
     create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE,
-    FOREIGN KEY (iid) REFERENCES items(iid) ON DELETE CASCADE
+    FOREIGN KEY (Iid) REFERENCES items(Iid) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 评论表
 CREATE TABLE IF NOT EXISTS reviews (
     sid INT AUTO_INCREMENT PRIMARY KEY,
-    iid INT NOT NULL,
+    Iid INT NOT NULL,
     oid VARCHAR(50) NOT NULL,
     uid VARCHAR(50) NOT NULL,
     ireview INT NOT NULL,
     icomment TEXT,
     review_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (iid) REFERENCES items(iid) ON DELETE CASCADE,
+    FOREIGN KEY (Iid) REFERENCES items(Iid) ON DELETE CASCADE,
     FOREIGN KEY (oid) REFERENCES orders(oid) ON DELETE CASCADE,
     FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS after_sales (
     finish_time DATETIME,
     FOREIGN KEY (user_id) REFERENCES users(uid) ON DELETE CASCADE,
     FOREIGN KEY (order_id) REFERENCES orders(oid) ON DELETE CASCADE,
-    FOREIGN KEY (item_id) REFERENCES items(iid) ON DELETE CASCADE
+    FOREIGN KEY (item_id) REFERENCES items(Iid) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 会话表
@@ -168,7 +168,7 @@ CREATE INDEX idx_items_category ON items(category);
 CREATE INDEX idx_items_shop ON items(shop);
 CREATE INDEX idx_orders_uid ON orders(uid);
 CREATE INDEX idx_orders_status ON orders(pay_status, shipping_status);
-CREATE INDEX idx_reviews_iid ON reviews(iid);
+CREATE INDEX idx_reviews_Iid ON reviews(Iid);
 CREATE INDEX idx_reviews_uid ON reviews(uid);
 CREATE INDEX idx_after_sales_user ON after_sales(user_id);
 CREATE INDEX idx_after_sales_order ON after_sales(order_id);
@@ -189,6 +189,18 @@ INSERT INTO shop (shop_name, owner_id, description, create_time)
 VALUES ('科技数码店', 'seller001', '专营各类数码科技产品', NOW());
 
 COMMIT;
+
+ALTER TABLE items ADD COLUMN image_hash VARCHAR(32);
+
+-- 修改字段名为大写I开头
+ALTER TABLE items CHANGE COLUMN iid Iid VARCHAR(50);
+ALTER TABLE items CHANGE COLUMN iname Iname VARCHAR(100);
+ALTER TABLE items CHANGE COLUMN iimage Iimage VARCHAR(255);
+ALTER TABLE items CHANGE COLUMN istatus Istatus INT;
+
+-- 更新相关索引（如果有）
+DROP INDEX idx_items_iid ON items;
+CREATE INDEX idx_items_Iid ON items(Iid);
 
 -- 完成数据库初始化
 SELECT 'kejizhai数据库初始化完成' AS '状态';

@@ -16,7 +16,7 @@ public class shoppingcartDaoImpl implements shoppingcartDao {
     private JdbcTemplate jdbcTemplate;
 
     public boolean addshoppingcart(shoppingcart shoppingcart) throws SQLException {
-        String sql = "INSERT INTO shopping_cart (uid, iid, count, price) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO shopping_cart (uid, Iid, count, price) VALUES (?, ?, ?, ?)";
         try {
             int result = jdbcTemplate.update(sql,
                 shoppingcart.getUid(),
@@ -33,7 +33,7 @@ public class shoppingcartDaoImpl implements shoppingcartDao {
     
     public List<shoppingcart> getshoppingcart(int Iuid) throws SQLException {
         String sql = "SELECT sc.*, i.price FROM shopping_cart sc " +
-                    "JOIN items i ON sc.iid = i.iid " +
+                    "JOIN items i ON sc.Iid = i.Iid " +
                     "WHERE sc.uid = ?";
         try {
             return jdbcTemplate.query(sql, 

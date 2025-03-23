@@ -15,14 +15,13 @@ public class ItemServiceImpl implements ItemService {
     private ItemDao itemDao;
 
     @Override
-    public List<Items> getItems(String iid) throws SQLException {
+    public Items getItemByName(String Iid) throws SQLException {
         try {
-            return itemDao.getItems(iid);
+            return itemDao.getItemsByName(Iid);
         } catch (SQLException e) {
             throw new SQLException("获取商品信息失败: " + e.getMessage());
         }
     }
-
     @Override
     public boolean addItem(Items items) throws SQLException {
         try {
@@ -42,37 +41,36 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public boolean deleteItem(String iid) throws SQLException {
+    public boolean deleteItem(String Iid) throws SQLException {
         try {
-            return itemDao.deleteItem(iid);
+            return itemDao.deleteItem(Iid);
         } catch (SQLException e) {
             throw new SQLException("下架商品失败: " + e.getMessage());
         }
     }
 
     @Override
-    public List<Items> getItems() throws SQLException {
+    public int setIstatus(String Iid) {
         try {
-            return itemDao.getItems();
-        } catch (SQLException e) {
-            throw new SQLException("获取商品列表失败: " + e.getMessage());
-        }
-    }
-
-    @Override
-    public int setIstatus(String iid) {
-        try {
-            return itemDao.setIstatus(iid);
+            return itemDao.setIstatus(Iid);
         } catch (Exception e) {
             return 0; // 设置状态失败返回0
         }
     }
     @Override
-    public Items getItemById(String iid) throws SQLException {
+    public Items getItemById(String Iid) throws SQLException {
         try {
-            return itemDao.getItemById(iid);
+            return itemDao.getItemById(Iid);
         } catch (SQLException e) {
             throw new SQLException("获取商品信息失败: " + e.getMessage());
+        }
+    }
+    @Override
+    public List<Items> getAllItems() throws SQLException {
+        try {
+            return itemDao.getAllItems();
+        } catch (SQLException e) {
+            throw new SQLException("获取所有商品信息失败: " + e.getMessage());
         }
     }
 }

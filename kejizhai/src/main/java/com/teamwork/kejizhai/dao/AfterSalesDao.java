@@ -8,7 +8,7 @@ import com.teamwork.kejizhai.bean.AfterSales;
 public interface AfterSalesDao {
     void addAfterSales(AfterSales afterSales) throws SQLException;
     void updateAfterSales(AfterSales afterSales) throws SQLException;
-    void deleteAfterSales(String uid, String oid, String iid) throws SQLException;
-    AfterSales getAfterSales(String uid, String oid, String iid) throws SQLException;
+    void deleteAfterSales(String uid, String oid, String Iid) throws SQLException;
+    AfterSales getAfterSales(String uid, String oid, String Iid) throws SQLException;
     List<AfterSales> getAfterSalesByUserId(String uid) throws SQLException;
 }

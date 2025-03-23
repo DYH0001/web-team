@@ -10,7 +10,7 @@ public interface ReviewService {
     boolean addReview(review review) throws SQLException;
     
   
-    List<review> getReviewsByItemId(String iid) throws SQLException;
+    List<review> getReviewsByItemId(String Iid) throws SQLException;
 
     List<review> getReviewsByUserId(String uid) throws SQLException;
     review getReviewByOrderId(String oid) throws SQLException;

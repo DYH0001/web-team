@@ -42,9 +42,9 @@ public class reviewController {
 
 
     @GetMapping("/item/{itemId}")
-    public ResponseEntity<?> getItemReviews(@PathVariable String iid) {
+    public ResponseEntity<?> getItemReviews(@PathVariable String Iid) {
         try {
-            List<review> reviews = reviewService.getReviewsByItemId(iid);
+            List<review> reviews = reviewService.getReviewsByItemId(Iid);
             return ResponseEntity.ok(successResponse(reviews));
         } catch (SQLException e) {
             return ResponseEntity.badRequest().body(errorResponse("获取商品评论失败: " + e.getMessage()));

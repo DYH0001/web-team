@@ -7,15 +7,15 @@ import java.util.ArrayList;
 
 public class shoppingcart {
     private int uid;
-    private ArrayList iid;
+    private ArrayList Iid;
     private int count;
     private int price;
 
     public shoppingcart() {}
 
-public shoppingcart(int uid, ArrayList iid, int count, int price) { 
+public shoppingcart(int uid, ArrayList Iid, int count, int price) { 
     this.uid = uid;
-    this.iid = iid;
+    this.Iid = Iid;
     this.count = count;
     this.price = price;
 }
@@ -23,7 +23,7 @@ public int getUid() {
     return uid;
 }
 public ArrayList getIid() {
-    return iid;
+    return Iid;
 }
 public int getCount() {
     return count;

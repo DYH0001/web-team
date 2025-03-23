@@ -20,7 +20,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public List<Order> getOrders(String uid) throws SQLException {
-        String sql = "SELECT o.*, oi.iid, oi.count, oi.price FROM orders o " +
+        String sql = "SELECT o.*, oi.Iid, oi.count, oi.price FROM orders o " +
                     "LEFT JOIN order_items oi ON o.oid = oi.oid " +
                     "WHERE o.uid = ?";
         try {
@@ -55,7 +55,7 @@ public class OrderDaoImpl implements OrderDao {
             );
             
             if (result > 0 && order.getOrderItems() != null) {
-                String itemSql = "INSERT INTO order_items (oid, iid, count, price) VALUES (?, ?, ?, ?)";
+                String itemSql = "INSERT INTO order_items (oid, Iid, count, price) VALUES (?, ?, ?, ?)";
                 for (Items item : order.getOrderItems()) {
                     jdbcTemplate.update(itemSql,
                         order.getOid(),
